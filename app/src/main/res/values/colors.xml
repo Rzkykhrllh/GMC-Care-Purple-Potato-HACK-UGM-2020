@@ -6,4 +6,7 @@
 
     <color name="colorNoName1">#EEFDFA</color>
     <color name="colorNoName2">#E1F7F4</color>
+
+    <color name="hitam">#000</color>
+    <color name="putih">#FFF</color>
 </resources>
