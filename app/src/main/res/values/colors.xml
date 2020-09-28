@@ -9,4 +9,5 @@
 
     <color name="hitam">#000</color>
     <color name="putih">#FFF</color>
+    <color name="highlight">#21DFC6</color>
 </resources>
