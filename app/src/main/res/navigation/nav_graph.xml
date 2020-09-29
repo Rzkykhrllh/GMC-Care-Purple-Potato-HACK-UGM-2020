@@ -43,12 +43,35 @@
         android:id="@+id/queueFragment"
         android:name="com.purplepotato.gmccare.QueueFragment"
         android:label="fragment_queue"
-        tools:layout="@layout/fragment_queue" />
+        tools:layout="@layout/fragment_queue" >
+        <action
+            android:id="@+id/fromQueueToHomeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/queueFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/fromQueueToLoginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/queueFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.purplepotato.gmccare.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/toQueueFragment"
+            app:destination="@id/queueFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/fromHomeToLoginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/verificationFragment"
         android:name="com.purplepotato.gmccare.VerificationFragment"
