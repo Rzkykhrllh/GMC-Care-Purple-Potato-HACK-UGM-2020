@@ -9,7 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -41,19 +41,51 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        val fbAuth = FirebaseAuth.getInstance()
+        val currentUser = fbAuth.currentUser
+
+        if (currentUser == null) {
+            Toast.makeText(this, "Anda belum masuk ke akun", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
         when (item.itemId) {
             R.id.changePassword -> {
                 Toast.makeText(this, "change password", Toast.LENGTH_SHORT).show()
-                return true
             }
 
             R.id.signOut -> {
-                Toast.makeText(this, "sign out", Toast.LENGTH_SHORT).show()
-                Snackbar.make(drawer_layout, "sign out", Snackbar.LENGTH_LONG)
-                return true
+                /*to-do : sign out firebase account
+                    your code
+                 */
+                if (navController.currentDestination!!.id == R.id.queueFragment) {
+                    navController.navigate(R.id.fromQueueToLoginFragment)
+                }
+
+                if (navController.currentDestination!!.id == R.id.homeFragment) {
+                    navController.navigate(R.id.fromHomeToLoginFragment)
+                }
+            }
+
+            R.id.homeFragment -> {
+                if (navController.currentDestination!!.id == R.id.loginFragment) {
+                    navController.navigate(R.id.fromLoginToHomeFragment)
+                }
+
+                if (navController.currentDestination!!.id == R.id.queueFragment) {
+                    navController.navigate(R.id.fromQueueToHomeFragment)
+                }
+            }
+
+            R.id.queueFragment -> {
+                if (navController.currentDestination!!.id == R.id.homeFragment) {
+                    navController.navigate(R.id.toQueueFragment)
+                }
+
             }
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
 }

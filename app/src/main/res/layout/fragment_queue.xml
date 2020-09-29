@@ -35,7 +35,6 @@
         android:id="@+id/tvCurrentTicketNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:fontFamily="@font/montserrat_semi_bold"
         android:text="A97"
         android:textColor="@color/colorBlack"
@@ -76,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:padding="8dp"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toTopOf="@id/box_room_4"
         app:layout_constraintEnd_toStartOf="@id/box_room_2"
         app:layout_constraintStart_toStartOf="parent">
@@ -127,7 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:padding="8dp"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toTopOf="@id/box_room_5"
         app:layout_constraintEnd_toStartOf="@id/box_room_3"
         app:layout_constraintStart_toEndOf="@id/box_room_1">
@@ -178,7 +177,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:padding="8dp"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toTopOf="@id/box_room_6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/box_room_2">
@@ -229,7 +228,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:padding="8dp"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_box"
         app:layout_constraintEnd_toStartOf="@id/box_room_5"
         app:layout_constraintStart_toStartOf="parent">
@@ -280,7 +279,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:padding="8dp"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_box"
         app:layout_constraintEnd_toStartOf="@id/box_room_6"
         app:layout_constraintStart_toEndOf="@id/box_room_4">
@@ -331,7 +330,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:padding="8dp"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/box_room_5">
