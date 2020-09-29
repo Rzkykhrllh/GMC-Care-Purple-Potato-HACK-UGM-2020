@@ -1,13 +1,14 @@
 package com.purplepotato.gmccare
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -20,15 +21,13 @@ class LoginFragment : Fragment(), View.OnClickListener {
         super.onStart()
         fbAuth = FirebaseAuth.getInstance()
         val user = fbAuth.currentUser
-        if (user != null){
+        if (user != null) {
             toHomeFragment()
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         val fbAuthentication = FirebaseAuthentication()
         val viewModelFactory = LoginViewModelFactory(fbAuthentication)
         viewModel = ViewModelProvider(this, viewModelFactory)
@@ -116,7 +115,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         return email.matches(emailPattern.toRegex())
     }
 
-    private fun toHomeFragment(){
+    private fun toHomeFragment() {
         findNavController().navigate(R.id.fromLoginToHomeFragment)
     }
 
