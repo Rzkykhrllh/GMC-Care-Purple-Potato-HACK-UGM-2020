@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 
@@ -21,6 +20,8 @@ class SignUpFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnSignUp.setOnClickListener(this)
+        btnBackToLoginFragment.setOnClickListener(this)
+        tvBackToLoginFragment.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -29,6 +30,9 @@ class SignUpFragment : Fragment(), View.OnClickListener {
                 //code for sign up to firebase
                 findNavController().navigate(R.id.toVerificationFragment)
             }
+
+            R.id.btnBackToLoginFragment -> requireActivity().onBackPressed()
+            R.id.tvBackToLoginFragment -> requireActivity().onBackPressed()
         }
     }
 }

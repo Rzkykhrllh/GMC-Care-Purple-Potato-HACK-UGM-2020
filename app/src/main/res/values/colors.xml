@@ -7,7 +7,7 @@
     <color name="colorNoName1">#EEFDFA</color>
     <color name="colorNoName2">#E1F7F4</color>
 
-    <color name="hitam">#000</color>
-    <color name="putih">#FFF</color>
-    <color name="highlight">#21DFC6</color>
+    <color name="colorBlack">#000</color>
+    <color name="colorWhite">#FFF</color>
+    <color name="colorHighlight">#21DFC6</color>
 </resources>

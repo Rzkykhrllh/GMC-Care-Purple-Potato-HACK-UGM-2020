@@ -4,250 +4,225 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp"
     tools:context=".LoginFragment">
 
-
-    <ImageView
-        android:id="@+id/imageView"
+    <ImageButton
+        android:id="@+id/btnBackToLoginFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorWhite"
         android:src="@drawable/ic_baseline_arrow_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_login_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="Daftar"
-        android:textAlignment="center"
-        android:textColor="@color/hitam"
+        android:textColor="@color/colorBlack"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/btnBackToLoginFragment" />
 
     <TextView
         android:id="@+id/tv_subtitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/montserrat_light"
         android:text="Silahkan isi form dibawah ini"
-        android:textAlignment="center"
-        android:textColor="@color/hitam"
+        android:textColor="@color/colorBlack"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_login_title" />
 
     <TextView
-        android:id="@+id/tv_nama"
+        android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/montserrat_medium"
         android:text="Nama"
-        android:textColor="@color/hitam"
+        android:textColor="@color/colorBlack"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tv_subtitle"
+        app:layout_constraintStart_toStartOf="@id/tv_subtitle"
         app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
 
     <EditText
-        android:id="@+id/et_nama"
+        android:id="@+id/et_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/colorPrimary"
-        android:ems="10"
         android:fontFamily="@font/montserrat_medium"
+        android:hint="Nama Lengkap"
         android:inputType="textPersonName"
-        android:text="Name"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nama"
-        tools:text="Rizky Khairullah" />
+        app:layout_constraintEnd_toEndOf="@id/tv_name"
+        app:layout_constraintStart_toStartOf="@id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
     <TextView
         android:id="@+id/tv_tl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/montserrat_medium"
         android:text="Tanggal Lahir"
-        android:textColor="@color/hitam"
+        android:textColor="@color/colorBlack"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_nama" />
+        app:layout_constraintEnd_toEndOf="@id/et_name"
+        app:layout_constraintStart_toStartOf="@id/et_name"
+        app:layout_constraintTop_toBottomOf="@id/et_name" />
 
     <EditText
-        android:id="@+id/et_tl"
+        android:id="@+id/et_birth_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/colorPrimary"
         android:ems="10"
         android:fontFamily="@font/montserrat_medium"
-        android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="ini placeholder"
+        android:inputType="date"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_tl"
-        tools:text="9 Juli 2000" />
+        app:layout_constraintEnd_toEndOf="@id/tv_tl"
+        app:layout_constraintStart_toStartOf="@id/tv_tl"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tl" />
 
     <TextView
         android:id="@+id/tv_nik"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/montserrat_medium"
         android:text="NIK"
-        android:textColor="@color/hitam"
+        android:textColor="@color/colorBlack"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_tl" />
+        app:layout_constraintEnd_toEndOf="@id/et_birth_date"
+        app:layout_constraintStart_toStartOf="@id/et_birth_date"
+        app:layout_constraintTop_toBottomOf="@id/et_birth_date" />
 
     <EditText
         android:id="@+id/et_nik"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/colorPrimary"
-        android:ems="10"
         android:fontFamily="@font/montserrat_medium"
+        android:hint="ini place holder"
         android:inputType="textPersonName"
-        android:text="Name"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nik"
-        tools:text="123456" />
+        app:layout_constraintEnd_toEndOf="@id/tv_nik"
+        app:layout_constraintStart_toStartOf="@id/tv_nik"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nik" />
 
     <TextView
         android:id="@+id/tv_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/montserrat_medium"
         android:text="Email"
-        android:textColor="@color/hitam"
+        android:textColor="@color/colorBlack"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/et_nik"
+        app:layout_constraintStart_toStartOf="@id/et_nik"
         app:layout_constraintTop_toBottomOf="@id/et_nik" />
 
     <EditText
         android:id="@+id/et_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/colorPrimary"
-        android:ems="10"
         android:fontFamily="@font/montserrat_medium"
-        android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="email@address.com"
+        android:inputType="textEmailAddress"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_email"
-        tools:text="dummy@gmail.com" />
+        app:layout_constraintEnd_toEndOf="@id/tv_email"
+        app:layout_constraintStart_toStartOf="@id/tv_email"
+        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
 
     <TextView
         android:id="@+id/tv_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/montserrat_medium"
         android:text="Password"
-        android:textColor="@color/hitam"
+        android:textColor="@color/colorBlack"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/et_email"
+        app:layout_constraintStart_toStartOf="@id/et_email"
         app:layout_constraintTop_toBottomOf="@id/et_email" />
 
     <EditText
-        android:id="@+id/et_pass"
+        android:id="@+id/et_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/colorPrimary"
-        android:ems="10"
         android:fontFamily="@font/montserrat_medium"
+        android:hint="Must have at least 8 character"
         android:inputType="textPassword"
-        android:text="Name"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_pass"
-        tools:text="12345" />
+        app:layout_constraintEnd_toEndOf="@id/tv_pass"
+        app:layout_constraintStart_toStartOf="@id/tv_pass"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pass" />
 
-    <Button
-        android:paddingHorizontal="48dp"
-        android:background="@drawable/button_shape"
-        android:textSize="14sp"
-        android:fontFamily="@font/montserrat_bold"
-        android:id="@+id/btn_daftar"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Daftar"
-        android:textColor="@color/putih"
-        android:layout_marginBottom="36dp"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingHorizontal="24dp"
+        android:text="Daftar"
         android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="14sp"
+        app:cornerRadius="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_password" />
 
     <TextView
-        android:id="@+id/tv_akun"
+        android:id="@+id/tv_already_have_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="Sudah punya akun ?"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/btn_daftar" />
+        app:layout_constraintTop_toTopOf="@id/btnSignUp" />
 
     <TextView
-        android:id="@+id/tv_login"
+        android:id="@+id/tvBackToLoginFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textSize="12sp"
-        android:fontFamily="@font/montserrat_medium"
+        android:fontFamily="@font/montserrat_bold"
         android:text="Masuk"
-        android:textColor="@color/hitam"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_akun"
-        />
+        android:textColor="@color/colorBlack"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/tv_already_have_account"
+        app:layout_constraintTop_toBottomOf="@id/tv_already_have_account" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
