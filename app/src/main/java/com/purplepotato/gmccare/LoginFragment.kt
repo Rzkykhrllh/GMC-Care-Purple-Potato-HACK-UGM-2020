@@ -86,11 +86,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
                     isInputValid = false
                 }
 
-                if (isEmailValid(email)) {
-                    et_email.error = "Isi email anda dengan benar"
-                    isInputValid = false
-                }
-
                 if (password.length < 8) {
                     et_password.error = "Password anda harus lebih dari 8 karakter"
                     isInputValid = false
