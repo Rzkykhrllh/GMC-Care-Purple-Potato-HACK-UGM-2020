@@ -45,6 +45,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         btnToSignUpFragment.setOnClickListener(this)
         btnLogin.setOnClickListener(this)
+        tv_forgot_password.setOnClickListener(this)
         signInState()
     }
 
@@ -94,6 +95,10 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 if (isInputValid) {
                     viewModel.emailAndPasswordSignIn(email, password)
                 }
+            }
+
+            R.id.tv_forgot_password -> {
+
             }
         }
     }

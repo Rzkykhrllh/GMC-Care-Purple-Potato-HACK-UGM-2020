@@ -8,13 +8,16 @@ import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.change_password_bottom_sheet.view.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var navController: NavController
+    private lateinit var bottomSheetDialog: BottomSheetDialog
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +26,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navController = Navigation.findNavController(this, R.id.navHostFragment)
         NavigationUI.setupWithNavController(navigation_view, navController)
         navigation_view.setNavigationItemSelectedListener(this)
+
+        bottomSheetDialog = BottomSheetDialog(this)
+        val bottomSheetView = layoutInflater.inflate(
+            R.layout.change_password_bottom_sheet, null
+        )
+
+        bottomSheetDialog.setContentView(bottomSheetView)
+
+        bottomSheetView.btnChangePassword.setOnClickListener {
+            Toast.makeText(this, "reset password", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -41,17 +55,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        val fbAuth = FirebaseAuth.getInstance()
-        val currentUser = fbAuth.currentUser
-
-        if (currentUser == null) {
-            Toast.makeText(this, "Anda belum masuk ke akun", Toast.LENGTH_SHORT).show()
-            return false
-        }
+//        val fbAuth = FirebaseAuth.getInstance()
+//        val currentUser = fbAuth.currentUser
+//
+//        if (currentUser == null) {
+//            Toast.makeText(this, "Anda belum masuk ke akun", Toast.LENGTH_SHORT).show()
+//            return false
+//        }
 
         when (item.itemId) {
             R.id.changePassword -> {
-                Toast.makeText(this, "change password", Toast.LENGTH_SHORT).show()
+                bottomSheetDialog.show()
             }
 
             R.id.signOut -> {
@@ -86,6 +100,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun showForgotPasswordBottomSheet() {
+
     }
 
 }
