@@ -5,11 +5,13 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.change_password_bottom_sheet.view.*
 
@@ -17,11 +19,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private lateinit var navController: NavController
     private lateinit var bottomSheetDialog: BottomSheetDialog
-
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val fbAuthentication = FirebaseAuthentication()
+        val viewModelFactory = MainViewModelFactory(fbAuthentication)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         navController = Navigation.findNavController(this, R.id.navHostFragment)
         NavigationUI.setupWithNavController(navigation_view, navController)
@@ -55,13 +60,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-//        val fbAuth = FirebaseAuth.getInstance()
-//        val currentUser = fbAuth.currentUser
-//
-//        if (currentUser == null) {
-//            Toast.makeText(this, "Anda belum masuk ke akun", Toast.LENGTH_SHORT).show()
-//            return false
-//        }
+        val fbAuth = FirebaseAuth.getInstance()
+        val currentUser = fbAuth.currentUser
+
+        if (currentUser == null) {
+            Toast.makeText(this, "Anda belum masuk ke akun", Toast.LENGTH_SHORT).show()
+            return false
+        }
 
         when (item.itemId) {
             R.id.changePassword -> {
@@ -69,9 +74,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.signOut -> {
-                /*to-do : sign out firebase account
-                    your code
-                 */
+                viewModel.signOut()
+
                 if (navController.currentDestination!!.id == R.id.queueFragment) {
                     navController.navigate(R.id.fromQueueToLoginFragment)
                 }
@@ -100,10 +104,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
-    }
-
-    fun showForgotPasswordBottomSheet() {
-
     }
 
 }

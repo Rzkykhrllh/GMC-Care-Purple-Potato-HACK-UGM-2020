@@ -22,4 +22,8 @@ class FirebaseAuthentication {
                 onError(it)
             }
     }
+
+    fun signOut(){
+        fbAuth.signOut()
+    }
 }
