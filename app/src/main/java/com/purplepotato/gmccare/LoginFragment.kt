@@ -1,14 +1,13 @@
 package com.purplepotato.gmccare
 
 import android.os.Bundle
-import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -94,6 +93,8 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
                 if (isInputValid) {
                     viewModel.emailAndPasswordSignIn(email, password)
+                    et_email.setText("")
+                    et_password.setText("")
                 }
             }
 
@@ -104,10 +105,14 @@ class LoginFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showLoading(state: Boolean) {
-        if (state)
+        if (state) {
+            frame.visibility = View.VISIBLE
             loginProgressBar.visibility = View.VISIBLE
-        else
+        } else {
             loginProgressBar.visibility = View.GONE
+            frame.visibility = View.GONE
+        }
+
     }
 
     private fun isEmailValid(email: String): Boolean {

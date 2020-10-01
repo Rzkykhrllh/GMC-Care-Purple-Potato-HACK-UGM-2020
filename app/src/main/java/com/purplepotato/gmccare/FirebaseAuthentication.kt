@@ -23,7 +23,19 @@ class FirebaseAuthentication {
             }
     }
 
-    fun signOut(){
+    fun sendPasswordResetEmail(
+        email: String,
+        onSuccess: (Boolean) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        fbAuth.sendPasswordResetEmail(email).addOnSuccessListener {
+            onSuccess(true)
+        }.addOnFailureListener {
+            onFailure(it)
+        }
+    }
+
+    fun signOut() {
         fbAuth.signOut()
     }
 }

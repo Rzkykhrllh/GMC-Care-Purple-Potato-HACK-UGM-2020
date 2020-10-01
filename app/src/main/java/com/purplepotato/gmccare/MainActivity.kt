@@ -3,6 +3,7 @@ package com.purplepotato.gmccare
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
@@ -40,8 +41,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         bottomSheetDialog.setContentView(bottomSheetView)
 
         bottomSheetView.btnChangePassword.setOnClickListener {
-            Toast.makeText(this, "reset password", Toast.LENGTH_SHORT).show()
+            val email = bottomSheetView.et_email_password_recovery.text.toString().trim()
+           viewModel.resetPasswordEmail(email)
+            bottomSheetView.et_email_password_recovery.setText("")
+            bottomSheetDialog.hide()
         }
+        forgotPasswordState()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -74,15 +79,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.signOut -> {
-                viewModel.signOut()
-
-                if (navController.currentDestination!!.id == R.id.queueFragment) {
-                    navController.navigate(R.id.fromQueueToLoginFragment)
-                }
-
-                if (navController.currentDestination!!.id == R.id.homeFragment) {
-                    navController.navigate(R.id.fromHomeToLoginFragment)
-                }
+                showSignOutAlertDialog()
             }
 
             R.id.homeFragment -> {
@@ -104,6 +101,43 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun showSignOutAlertDialog() {
+
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.setMessage("Are you sure want to sign out?")
+        alertDialog.setPositiveButton("Sign out") { _, _ ->
+            viewModel.signOut()
+
+            if (navController.currentDestination!!.id == R.id.queueFragment) {
+                navController.navigate(R.id.fromQueueToLoginFragment)
+            }
+
+            if (navController.currentDestination!!.id == R.id.homeFragment) {
+                navController.navigate(R.id.fromHomeToLoginFragment)
+            }
+        }.setNegativeButton("Cancel") { _, _ -> }
+
+        alertDialog.show()
+    }
+
+    private fun forgotPasswordState() {
+        viewModel.getResetPasswordEmailState().observe(this, { response ->
+            when (response) {
+                is State.OnSuccess -> {
+                    Toast.makeText(this, "Please check your email to change your password", Toast.LENGTH_SHORT).show()
+                }
+
+                is State.OnError -> {
+                    Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+                }
+
+                is State.OnLoading -> {
+                }
+            }
+
+        })
     }
 
 }
