@@ -1,4 +1,4 @@
-package com.purplepotato.gmccare.Airu.Model
+package com.purplepotato.gmccare.model
 
 data class Pasien(
  var nama: String = "",
