@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 class LoginViewModel(private val fbAuth: FirebaseAuthentication) : ViewModel() {
 
     private val _signIn = MutableLiveData<State<Boolean>>()
+    private val _resetPasswordEmail = MutableLiveData<State<Boolean>>()
 
     fun emailAndPasswordSignIn(email: String, password: String) = viewModelScope.launch {
         _signIn.postValue(State.OnLoading())
@@ -21,5 +22,18 @@ class LoginViewModel(private val fbAuth: FirebaseAuthentication) : ViewModel() {
     }
 
     fun getSignInState(): LiveData<State<Boolean>> = _signIn
+
+
+    fun resetPasswordEmail(email: String) = viewModelScope.launch {
+        _resetPasswordEmail.postValue(State.OnLoading())
+
+        fbAuth.sendPasswordResetEmail(email, {
+            _resetPasswordEmail.postValue(State.OnSuccess(true))
+        }, {
+            _resetPasswordEmail.postValue(State.OnError(it.message))
+        })
+    }
+
+    fun getResetPasswordEmailState(): LiveData<State<Boolean>> =_resetPasswordEmail
 
 }

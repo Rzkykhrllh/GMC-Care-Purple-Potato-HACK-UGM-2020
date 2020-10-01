@@ -16,6 +16,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private lateinit var fbAuth: FirebaseAuth
     private lateinit var viewModel: LoginViewModel
 
+    companion object {
+        const val forgotBottomSheetRequestKey = "request_email"
+        const val forgotBottomSheetBundleKey = "bottom_sheet_bundle_key"
+    }
+
     override fun onStart() {
         super.onStart()
         fbAuth = FirebaseAuth.getInstance()
@@ -46,6 +51,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         btnLogin.setOnClickListener(this)
         tv_forgot_password.setOnClickListener(this)
         signInState()
+        forgotPasswordState()
     }
 
     private fun signInState() {
@@ -99,7 +105,17 @@ class LoginFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.tv_forgot_password -> {
+                val modalBottomSheet = ForgotPasswordBottomSheetDialog()
+                modalBottomSheet.show(childFragmentManager, modalBottomSheet.tag)
 
+                childFragmentManager.setFragmentResultListener(forgotBottomSheetRequestKey,
+                    viewLifecycleOwner,
+                    { _, bundle ->
+                        val result = bundle.getString(forgotBottomSheetBundleKey)
+                        result?.let {
+                            viewModel.resetPasswordEmail(result)
+                        }
+                    })
             }
         }
     }
@@ -122,6 +138,33 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     private fun toHomeFragment() {
         findNavController().navigate(R.id.fromLoginToHomeFragment)
+    }
+
+    private fun forgotPasswordState() {
+        viewModel.getResetPasswordEmailState().observe(viewLifecycleOwner, { response ->
+            when (response) {
+                is State.OnSuccess -> {
+                    showLoading(false)
+                    Toast.makeText(
+                        activity,
+                        "Please check your email to change your password",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                }
+
+                is State.OnError -> {
+                    showLoading(false)
+                    response.message?.let {
+                        Toast.makeText(activity, response.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+                is State.OnLoading -> {
+                    showLoading(true)
+                }
+            }
+
+        })
     }
 
 }

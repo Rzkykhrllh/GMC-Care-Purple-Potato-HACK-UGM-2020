@@ -1,27 +1,20 @@
 package com.purplepotato.gmccare
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.Navigation
-import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.*
-import com.purplepotato.gmccare.Airu.Model.Nomor
-import com.purplepotato.gmccare.Airu.Model.Pasien
-import kotlinx.android.synthetic.main.activity_main.*
+import com.purplepotato.gmccare.model.Nomor
+import com.purplepotato.gmccare.model.Pasien
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment(), View.OnClickListener {

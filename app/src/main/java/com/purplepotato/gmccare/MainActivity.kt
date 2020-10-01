@@ -42,7 +42,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         bottomSheetView.btnChangePassword.setOnClickListener {
             val email = bottomSheetView.et_email_password_recovery.text.toString().trim()
-           viewModel.resetPasswordEmail(email)
+
+            if(email.isNotEmpty()){
+                viewModel.resetPasswordEmail(email)
+            } else {
+                bottomSheetView.et_email_password_recovery.error = "Field ini tidak boleh kosong"
+            }
+
             bottomSheetView.et_email_password_recovery.setText("")
             bottomSheetDialog.hide()
         }
