@@ -1,2 +1,3 @@
+include ':gmccareadmin'
 include ':app'
 rootProject.name = "GMC Care"
