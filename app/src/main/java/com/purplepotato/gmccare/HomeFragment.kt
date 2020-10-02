@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.google.firebase.database.*
-import com.purplepotato.gmccare.Airu.Model.Nomor
-import com.purplepotato.gmccare.Airu.Model.Pasien
+import com.google.firebase.database.* 
+import com.purplepotato.gmccare.model.Nomor
+import com.purplepotato.gmccare.model.Pasien
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
