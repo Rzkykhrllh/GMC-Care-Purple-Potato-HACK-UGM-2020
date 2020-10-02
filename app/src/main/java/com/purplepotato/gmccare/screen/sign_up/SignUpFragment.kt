@@ -1,5 +1,6 @@
 package com.purplepotato.gmccare.screen.sign_up
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +14,13 @@ import com.purplepotato.gmccare.State
 import com.purplepotato.gmccare.service.FirebaseAuthentication
 import com.purplepotato.gmccare.service.RealtimeDatabase
 import kotlinx.android.synthetic.main.fragment_sign_up.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SignUpFragment : Fragment(), View.OnClickListener {
 
     private lateinit var viewModel: SignUpViewModel
+    private lateinit var calendar: Calendar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +43,11 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         btnSignUp.setOnClickListener(this)
         btnBackToLoginFragment.setOnClickListener(this)
         tvBackToLoginFragment.setOnClickListener(this)
+        et_birth_date.setOnClickListener(this)
+        calendar = Calendar.getInstance()
         getSignUpState()
+
+
     }
 
     override fun onClick(v: View) {
@@ -47,6 +55,20 @@ class SignUpFragment : Fragment(), View.OnClickListener {
             R.id.btnSignUp -> signUp()
             R.id.btnBackToLoginFragment -> requireActivity().onBackPressed()
             R.id.tvBackToLoginFragment -> requireActivity().onBackPressed()
+            R.id.et_birth_date -> {
+                val dataSetListener =
+                    DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                        calendar.set(Calendar.YEAR, year)
+                        calendar.set(Calendar.MONTH,monthOfYear)
+                        calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+                        updateDateInView()
+                    }
+
+                DatePickerDialog(requireContext(),dataSetListener,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)).show()
+            }
         }
     }
 
@@ -86,9 +108,9 @@ class SignUpFragment : Fragment(), View.OnClickListener {
             et_password.error = "Password kurang dari 8 karakter"
             return
         }
+        val dateToLong = convertDateToLong(birthDate)
 
-
-        viewModel.createUserWithEmailAndPassword(email, password, name, birthDate.toLong(), nik)
+        viewModel.createUserWithEmailAndPassword(email, password, name, dateToLong, nik)
 
     }
 
@@ -121,5 +143,20 @@ class SignUpFragment : Fragment(), View.OnClickListener {
             signUpLoadingFrame.visibility = View.GONE
         }
 
+    }
+
+    private fun updateDateInView(){
+        val formatDate = "d MMMM YYYY"
+        val sdf = SimpleDateFormat(formatDate, Locale.getDefault())
+        val date = calendar.time
+        et_birth_date.setText(sdf.format(date))
+
+    }
+
+    private fun convertDateToLong(date: String): Long {
+        val formatDate = "d MMMM YYYY"
+        val sdf = SimpleDateFormat(formatDate, Locale.getDefault())
+
+        return sdf.parse(date).time
     }
 }
