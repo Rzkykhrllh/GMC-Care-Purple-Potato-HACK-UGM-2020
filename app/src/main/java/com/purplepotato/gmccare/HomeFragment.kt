@@ -2,20 +2,22 @@ package com.purplepotato.gmccare
 
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.database.* 
 import com.purplepotato.gmccare.model.Nomor
 import com.purplepotato.gmccare.model.Pasien
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment(), View.OnClickListener {
 
@@ -40,7 +42,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
             Log.d("button", "queue")
             val pasien = makeUser()
 
+
             takeNumber()
+
         }
     }
 
@@ -78,8 +82,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
                                 nomor = data.no_antrian
                                 Log.d("Ambil nomor", "$nomor")
 
-                                ToQueue(nomor, Pasien("Airu", "12345", "WAITING"))
+                                ToQueue(nomor, Pasien("Airu", "12345", "$nomor", "WAITING"))
                                 updateNumber(nomor.toInt())
+
                             }
                         }
                     }
@@ -105,6 +110,14 @@ class HomeFragment : Fragment(), View.OnClickListener {
             .updateChildren(map as Map<String, Any>)
 
         Log.d("update nomor", "$num")
+
+        Log.d("pindah kuy", "mau pindah ke queue fragment nomor")
+
+        CoroutineScope(Main).launch{
+            delay(2000)
+            findNavController().navigate(R.id.toQueueFragment)
+        }
+        //startActivity(Intent(context, dmmyactivity::class.java))
     }
 
     private fun ToQueue(no: String, pasien: Pasien) {
@@ -119,6 +132,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 Toast.makeText(activity, "Silahkan tunggu nomormu dipanggil", Toast.LENGTH_LONG)
                 Log.d("antri", "Berhasil antri dengan nomor $no")
             }
+
+        // findNavController().navigate(R.id.toQueueFragment)
     }
 
 }
