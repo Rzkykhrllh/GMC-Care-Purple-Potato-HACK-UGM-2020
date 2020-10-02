@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.google.firebase.database.*
+import com.google.firebase.database.* 
 import com.purplepotato.gmccare.model.Nomor
 import com.purplepotato.gmccare.model.Pasien
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -40,14 +40,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
             Log.d("button", "queue")
             val pasien = makeUser()
 
-            CoroutineScope(IO).launch {
-                takeNumber({
-                    Log.d("Nomornya fathur : ", "$number dan $it")
-                    number = it
-                    ToQueue(number, pasien)
-                })
-            }
-            updateNumber()
+            takeNumber()
         }
     }
 
@@ -66,23 +59,27 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
 
-    private suspend fun takeNumber(onResult: (String) -> Unit): String {
+    private fun takeNumber() {
         //fungsi untuk mengambil nomor antrian dari database
         var nomor = "-2"
 
         FirebaseDatabase
             .getInstance()
-            .getReference("Nomor").addValueEventListener(
+            .getReference("Nomor").addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onDataChange(p0: DataSnapshot) {
+
 
                         for (child in p0.children) {
                             val data = child.getValue(Nomor::class.java)
                             Log.d("cek nomor", "aye aye")
 
                             if (data != null) {
-                                onResult(data.no_antrian)
+                                nomor = data.no_antrian
                                 Log.d("Ambil nomor", "$nomor")
+
+                                ToQueue(nomor, Pasien("Airu", "12345", "WAITING"))
+                                updateNumber(nomor.toInt())
                             }
                         }
                     }
@@ -92,11 +89,22 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 }
             )
         Log.d("nomor akhir", "$nomor")
-        return nomor
     }
 
-    private fun updateNumber() {
+    private fun updateNumber(number_now : Int) {
         //fungsi untuk update nomor di database, setelah kita ambil
+
+        var map = mutableMapOf<String, String>()
+        var num = number_now + 1
+        map["no_antrian"] = num.toString()
+
+
+        FirebaseDatabase.getInstance().reference //update saldo
+            .child("Nomor")
+            .child("0")
+            .updateChildren(map as Map<String, Any>)
+
+        Log.d("update nomor", "$num")
     }
 
     private fun ToQueue(no: String, pasien: Pasien) {
