@@ -1,18 +1,16 @@
-package com.purplepotato.gmccare
+package com.purplepotato.gmccare.screen
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.purplepotato.gmccare.R
+
 import kotlinx.android.synthetic.main.fragment_verification.*
 
-class VerificationFragment : Fragment(),View.OnClickListener {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+class VerificationFragment : Fragment(), View.OnClickListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +25,7 @@ class VerificationFragment : Fragment(),View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-        when(v.id){
+        when (v.id) {
             R.id.btnAddVerificationPhoto -> {
                 //code for open camera and save the result to firebase
 

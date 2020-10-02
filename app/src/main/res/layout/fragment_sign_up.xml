@@ -1,228 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="16dp"
-    android:paddingVertical="8dp"
-    tools:context=".LoginFragment">
+    tools:context=".screen.login.LoginFragment">
 
-    <ImageButton
-        android:id="@+id/btnBackToLoginFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/colorWhite"
-        android:src="@drawable/ic_baseline_arrow_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_login_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="Daftar"
-        android:textColor="@color/colorBlack"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnBackToLoginFragment" />
-
-    <TextView
-        android:id="@+id/tv_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/montserrat_light"
-        android:text="Silahkan isi form dibawah ini"
-        android:textColor="@color/colorBlack"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_login_title" />
-
-    <TextView
-        android:id="@+id/tv_name"
+    <FrameLayout
+        android:id="@+id/signUpLoadingFrame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="Nama"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@id/tv_subtitle"
-        app:layout_constraintStart_toStartOf="@id/tv_subtitle"
-        app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
+        android:layout_height="match_parent"
+        android:alpha="0.1"
+        android:background="@color/colorBlack"
+        android:visibility="gone" />
 
-    <EditText
-        android:id="@+id/et_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimary"
-        android:fontFamily="@font/montserrat_medium"
-        android:hint="Nama Lengkap"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/tv_name"
-        app:layout_constraintStart_toStartOf="@id/tv_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
-
-    <TextView
-        android:id="@+id/tv_tl"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="Tanggal Lahir"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@id/et_name"
-        app:layout_constraintStart_toStartOf="@id/et_name"
-        app:layout_constraintTop_toBottomOf="@id/et_name" />
+        android:layout_height="match_parent"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp">
 
-    <EditText
-        android:id="@+id/et_birth_date"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimary"
-        android:ems="10"
-        android:fontFamily="@font/montserrat_medium"
-        android:hint="ini placeholder"
-        android:inputType="date"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/tv_tl"
-        app:layout_constraintStart_toStartOf="@id/tv_tl"
-        app:layout_constraintTop_toBottomOf="@+id/tv_tl" />
+        <ImageButton
+            android:id="@+id/btnBackToLoginFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/ic_baseline_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_nik"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="NIK"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@id/et_birth_date"
-        app:layout_constraintStart_toStartOf="@id/et_birth_date"
-        app:layout_constraintTop_toBottomOf="@id/et_birth_date" />
+        <TextView
+            android:id="@+id/tv_login_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Daftar"
+            android:textColor="@color/colorBlack"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnBackToLoginFragment" />
 
-    <EditText
-        android:id="@+id/et_nik"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimary"
-        android:fontFamily="@font/montserrat_medium"
-        android:hint="ini place holder"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/tv_nik"
-        app:layout_constraintStart_toStartOf="@id/tv_nik"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nik" />
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_light"
+            android:text="Silahkan isi form dibawah ini"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_login_title" />
 
-    <TextView
-        android:id="@+id/tv_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="Email"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@id/et_nik"
-        app:layout_constraintStart_toStartOf="@id/et_nik"
-        app:layout_constraintTop_toBottomOf="@id/et_nik" />
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Nama"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/tv_subtitle"
+            app:layout_constraintStart_toStartOf="@id/tv_subtitle"
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
 
-    <EditText
-        android:id="@+id/et_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimary"
-        android:fontFamily="@font/montserrat_medium"
-        android:hint="email@address.com"
-        android:inputType="textEmailAddress"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/tv_email"
-        app:layout_constraintStart_toStartOf="@id/tv_email"
-        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="Nama Lengkap"
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/tv_name"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
-    <TextView
-        android:id="@+id/tv_pass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="Password"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@id/et_email"
-        app:layout_constraintStart_toStartOf="@id/et_email"
-        app:layout_constraintTop_toBottomOf="@id/et_email" />
+        <TextView
+            android:id="@+id/tv_tl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Tanggal Lahir"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/et_name"
+            app:layout_constraintStart_toStartOf="@id/et_name"
+            app:layout_constraintTop_toBottomOf="@id/et_name" />
 
-    <EditText
-        android:id="@+id/et_password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimary"
-        android:fontFamily="@font/montserrat_medium"
-        android:hint="Must have at least 8 character"
-        android:inputType="textPassword"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/tv_pass"
-        app:layout_constraintStart_toStartOf="@id/tv_pass"
-        app:layout_constraintTop_toBottomOf="@+id/tv_pass" />
+        <EditText
+            android:id="@+id/et_birth_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="ini placeholder"
+            android:inputType="date"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/tv_tl"
+            app:layout_constraintStart_toStartOf="@id/tv_tl"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tl" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:paddingHorizontal="24dp"
-        android:text="Daftar"
-        android:textAllCaps="false"
-        android:textColor="@color/colorWhite"
-        android:textSize="14sp"
-        app:cornerRadius="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_password" />
+        <TextView
+            android:id="@+id/tv_nik"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="NIK"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/et_birth_date"
+            app:layout_constraintStart_toStartOf="@id/et_birth_date"
+            app:layout_constraintTop_toBottomOf="@id/et_birth_date" />
 
-    <TextView
-        android:id="@+id/tv_already_have_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Sudah punya akun ?"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/btnSignUp" />
+        <EditText
+            android:id="@+id/et_nik"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="ini place holder"
+            android:inputType="number"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/tv_nik"
+            app:layout_constraintStart_toStartOf="@id/tv_nik"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nik" />
 
-    <TextView
-        android:id="@+id/tvBackToLoginFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="Masuk"
-        android:textColor="@color/colorBlack"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@id/tv_already_have_account"
-        app:layout_constraintTop_toBottomOf="@id/tv_already_have_account" />
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Email"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/et_nik"
+            app:layout_constraintStart_toStartOf="@id/et_nik"
+            app:layout_constraintTop_toBottomOf="@id/et_nik" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="email@address.com"
+            android:inputType="textEmailAddress"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/tv_email"
+            app:layout_constraintStart_toStartOf="@id/tv_email"
+            app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+
+        <TextView
+            android:id="@+id/tv_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Password"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/et_email"
+            app:layout_constraintStart_toStartOf="@id/et_email"
+            app:layout_constraintTop_toBottomOf="@id/et_email" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="Must have at least 8 character"
+            android:inputType="textPassword"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/tv_pass"
+            app:layout_constraintStart_toStartOf="@id/tv_pass"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pass" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:paddingHorizontal="24dp"
+            android:text="Daftar"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            app:cornerRadius="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_password" />
+
+        <TextView
+            android:id="@+id/tv_already_have_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Sudah punya akun ?"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnSignUp" />
+
+        <TextView
+            android:id="@+id/tvBackToLoginFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Masuk"
+            android:textColor="@color/colorBlack"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/tv_already_have_account"
+            app:layout_constraintTop_toBottomOf="@id/tv_already_have_account" />
+
+        <ProgressBar
+            android:id="@+id/signUpProgressBar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

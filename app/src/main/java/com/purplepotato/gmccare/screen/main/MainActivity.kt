@@ -1,4 +1,4 @@
-package com.purplepotato.gmccare
+package com.purplepotato.gmccare.screen.main
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -13,6 +13,9 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.purplepotato.gmccare.R
+import com.purplepotato.gmccare.State
+import com.purplepotato.gmccare.service.FirebaseAuthentication
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.change_password_bottom_sheet.view.*
 

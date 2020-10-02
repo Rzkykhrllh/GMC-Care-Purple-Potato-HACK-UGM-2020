@@ -1,4 +1,4 @@
-package com.purplepotato.gmccare
+package com.purplepotato.gmccare.screen
 
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +13,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.purplepotato.gmccare.model.Nomor
+import com.purplepotato.gmccare.R
 import com.purplepotato.gmccare.model.Pasien
 import kotlinx.android.synthetic.main.fragment_queue.*
 

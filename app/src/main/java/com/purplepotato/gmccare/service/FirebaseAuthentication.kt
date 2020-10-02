@@ -1,4 +1,4 @@
-package com.purplepotato.gmccare
+package com.purplepotato.gmccare.service
 
 
 import com.google.firebase.auth.FirebaseAuth
@@ -33,6 +33,20 @@ class FirebaseAuthentication {
         }.addOnFailureListener {
             onFailure(it)
         }
+    }
+
+    fun createUser(
+        email: String,
+        password: String,
+        onSuccess: (Boolean) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        fbAuth.createUserWithEmailAndPassword(email, password)
+            .addOnSuccessListener {
+                onSuccess(true)
+            }.addOnFailureListener {
+                onFailure(it)
+            }
     }
 
     fun signOut() {

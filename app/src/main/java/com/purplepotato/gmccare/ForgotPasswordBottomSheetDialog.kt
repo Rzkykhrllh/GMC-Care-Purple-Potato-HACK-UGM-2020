@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.purplepotato.gmccare.screen.login.LoginFragment
 import kotlinx.android.synthetic.main.forgot_password_bottom_sheet.*
 
 class ForgotPasswordBottomSheetDialog : BottomSheetDialogFragment() {
