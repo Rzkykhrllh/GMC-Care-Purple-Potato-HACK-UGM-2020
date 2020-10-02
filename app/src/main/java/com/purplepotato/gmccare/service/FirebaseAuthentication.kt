@@ -1,4 +1,4 @@
-package com.purplepotato.gmccare
+package com.purplepotato.gmccare.service
 
 
 import com.google.firebase.auth.FirebaseAuth

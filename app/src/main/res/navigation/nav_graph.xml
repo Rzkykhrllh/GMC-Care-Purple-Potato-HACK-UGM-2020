@@ -6,7 +6,7 @@
     app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.purplepotato.gmccare.LoginFragment"
+        android:name="com.purplepotato.gmccare.screen.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.purplepotato.gmccare.SignUpFragment"
+        android:name="com.purplepotato.gmccare.screen.sign_up.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/queueFragment"
-        android:name="com.purplepotato.gmccare.QueueFragment"
+        android:name="com.purplepotato.gmccare.screen.QueueFragment"
         android:label="fragment_queue"
         tools:layout="@layout/fragment_queue" >
         <action
@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.purplepotato.gmccare.HomeFragment"
+        android:name="com.purplepotato.gmccare.screen.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -77,7 +77,7 @@
     </fragment>
     <fragment
         android:id="@+id/verificationFragment"
-        android:name="com.purplepotato.gmccare.VerificationFragment"
+        android:name="com.purplepotato.gmccare.screen.VerificationFragment"
         android:label="fragment_verification"
         tools:layout="@layout/fragment_verification" >
         <action

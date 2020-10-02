@@ -1,4 +1,4 @@
-package com.purplepotato.gmccare
+package com.purplepotato.gmccare.screen.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.purplepotato.gmccare.ForgotPasswordBottomSheetDialog
+import com.purplepotato.gmccare.R
+import com.purplepotato.gmccare.State
+import com.purplepotato.gmccare.service.FirebaseAuthentication
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment(), View.OnClickListener {
@@ -108,7 +112,8 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 val modalBottomSheet = ForgotPasswordBottomSheetDialog()
                 modalBottomSheet.show(childFragmentManager, modalBottomSheet.tag)
 
-                childFragmentManager.setFragmentResultListener(forgotBottomSheetRequestKey,
+                childFragmentManager.setFragmentResultListener(
+                    forgotBottomSheetRequestKey,
                     viewLifecycleOwner,
                     { _, bundle ->
                         val result = bundle.getString(forgotBottomSheetBundleKey)

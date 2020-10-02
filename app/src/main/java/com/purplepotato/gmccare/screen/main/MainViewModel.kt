@@ -1,9 +1,11 @@
-package com.purplepotato.gmccare
+package com.purplepotato.gmccare.screen.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.purplepotato.gmccare.State
+import com.purplepotato.gmccare.service.FirebaseAuthentication
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val fbAuth : FirebaseAuthentication): ViewModel() {

@@ -1,4 +1,4 @@
-package com.purplepotato.gmccare
+package com.purplepotato.gmccare.screen.sign_up
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.purplepotato.gmccare.R
+import com.purplepotato.gmccare.State
+import com.purplepotato.gmccare.service.FirebaseAuthentication
+import com.purplepotato.gmccare.service.RealtimeDatabase
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 
 class SignUpFragment : Fragment(), View.OnClickListener {
@@ -24,7 +28,8 @@ class SignUpFragment : Fragment(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val fbAuthentication = FirebaseAuthentication()
-        val viewModelFactory = SignUpViewModelFactory(fbAuthentication)
+        val fbDatabase = RealtimeDatabase()
+        val viewModelFactory = SignUpViewModelFactory(fbAuthentication, fbDatabase)
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(SignUpViewModel::class.java)
     }
@@ -82,7 +87,8 @@ class SignUpFragment : Fragment(), View.OnClickListener {
             return
         }
 
-        viewModel.createUserWithEmailAndPassword(email, password)
+
+        viewModel.createUserWithEmailAndPassword(email, password, name, birthDate.toLong(), nik)
 
     }
 
