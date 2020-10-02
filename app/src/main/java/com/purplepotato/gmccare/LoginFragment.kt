@@ -122,11 +122,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     private fun showLoading(state: Boolean) {
         if (state) {
-            frame.visibility = View.VISIBLE
+            loadingFrame.visibility = View.VISIBLE
             loginProgressBar.visibility = View.VISIBLE
         } else {
             loginProgressBar.visibility = View.GONE
-            frame.visibility = View.GONE
+            loadingFrame.visibility = View.GONE
         }
 
     }

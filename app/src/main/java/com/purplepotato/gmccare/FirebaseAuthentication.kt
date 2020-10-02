@@ -35,6 +35,20 @@ class FirebaseAuthentication {
         }
     }
 
+    fun createUser(
+        email: String,
+        password: String,
+        onSuccess: (Boolean) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        fbAuth.createUserWithEmailAndPassword(email, password)
+            .addOnSuccessListener {
+                onSuccess(true)
+            }.addOnFailureListener {
+                onFailure(it)
+            }
+    }
+
     fun signOut() {
         fbAuth.signOut()
     }

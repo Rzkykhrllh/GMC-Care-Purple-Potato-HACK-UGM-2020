@@ -7,7 +7,7 @@
     tools:context=".LoginFragment">
 
     <FrameLayout
-        android:id="@+id/frame"
+        android:id="@+id/loadingFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.1"
