@@ -2,6 +2,7 @@ package com.purplepotato.gmccareadmin.fragment
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.core.Context
+import com.purplepotato.gmccareadmin.ConfirmationActivity
 import com.purplepotato.gmccareadmin.Pasien
 import com.purplepotato.gmccareadmin.R
 import kotlinx.android.synthetic.main.bottomsheet_fragment.*
@@ -82,9 +84,17 @@ class Antrian : Fragment() {
 
                         rv_queue.layoutManager = LinearLayoutManager(context) //ngeset recycler view
                         rv_queue.adapter = QueueAdapter(dataList) {
+                            var data = it
 
-                            bottom_sheet_fragment.show(childFragmentManager, "yey")
-                            /*btnPanggil.setOnClickListener {
+                            var intent : Intent = Intent(context, ConfirmationActivity::class.java)
+                                .putExtra("nama", data.nama)
+                                .putExtra("no", data.no_antrian)
+                                .putExtra("nik", data.nik)
+                                .putExtra("status", data.status)
+                            startActivity(intent)
+
+                            /*bottom_sheet_fragment.show(childFragmentManager, "yey")
+                            bottom_sheet_fragment.btnPanggil.setOnClickListener {
                                 Toast.makeText(context, "Bisa mencet", Toast.LENGTH_SHORT).show()
                             }*/
 
