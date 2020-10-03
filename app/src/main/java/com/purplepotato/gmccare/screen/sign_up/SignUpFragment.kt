@@ -111,7 +111,6 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         val dateToLong = convertDateToLong(birthDate)
 
         viewModel.createUserWithEmailAndPassword(email, password, name, dateToLong, nik)
-
     }
 
     private fun getSignUpState() {
