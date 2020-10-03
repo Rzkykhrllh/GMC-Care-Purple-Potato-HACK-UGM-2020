@@ -22,5 +22,9 @@
     <style name="ThemeOverlay.Demo.BottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/Widget.Demo.BottomSheet</item>
     </style>
+    
+    <style name="CustomTabStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">10sp</item>
+    </style>
 
 </resources>

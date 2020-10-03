@@ -1,4 +1,4 @@
-package com.purplepotato.gmccare.screen
+package com.purplepotato.gmccareadmin.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -7,37 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.purplepotato.gmccare.R
-import com.purplepotato.gmccare.model.Pasien
-import kotlinx.android.synthetic.main.fragment_queue.*
+import com.purplepotato.gmccareadmin.Pasien
+import com.purplepotato.gmccareadmin.R
+import kotlinx.android.synthetic.main.fragment_ruangan.*
 
-class QueueFragment : Fragment(), View.OnClickListener {
+class RuanganFragment : Fragment() {
 
-    private lateinit var drawerLayout: DrawerLayout
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_queue, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        drawerLayout = requireActivity().findViewById(R.id.drawer_layout)
-
-        btnOpenDrawerInQueue.setOnClickListener(this)
-
-        Log.d("queue", "udah di qeue fragment")
-
-        //lihat nomor pasien tiap ruangan
         updateRuang1()
         updateRuang2()
         updateRuang3()
@@ -48,8 +30,16 @@ class QueueFragment : Fragment(), View.OnClickListener {
 
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_ruangan, container, false)
+    }
+
     private fun updateRuang1(){
-        var nomor : String = ""
+        lateinit var nomor : Pasien
         FirebaseDatabase
             .getInstance()
             .getReference("RUANG_1").addValueEventListener(
@@ -62,12 +52,14 @@ class QueueFragment : Fragment(), View.OnClickListener {
                             Log.d("cek nomor", "aye aye")
 
                             if (data != null) {
-                                nomor = data.no_antrian
+                                nomor = data
                                 Log.d("nomor ruang 1", "$nomor")
                             }
 
                         }
-                        num_room_1.text = nomor
+                        num_room_1.text = nomor.no_antrian
+                        tv_nama1.text = nomor.nama
+                        tv_nik1.text = nomor.nik
                     }
                     override fun onCancelled(p0: DatabaseError) {
                         Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT)
@@ -78,7 +70,7 @@ class QueueFragment : Fragment(), View.OnClickListener {
     }
 
     private fun updateRuang2(){
-        var nomor : String = ""
+        lateinit var nomor : Pasien
         FirebaseDatabase
             .getInstance()
             .getReference("RUANG_2").addValueEventListener(
@@ -91,12 +83,14 @@ class QueueFragment : Fragment(), View.OnClickListener {
                             Log.d("cek nomor", "aye aye")
 
                             if (data != null) {
-                                nomor = data.no_antrian
+                                nomor = data
                                 Log.d("nomor ruang 2", "$nomor")
                             }
 
                         }
-                        num_room_2.text = nomor
+                        num_room_2.text = nomor.no_antrian
+                        tv_nama2.text = nomor.nama
+                        tv_nik2.text = nomor.nik
                     }
                     override fun onCancelled(p0: DatabaseError) {
                         Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT)
@@ -107,7 +101,7 @@ class QueueFragment : Fragment(), View.OnClickListener {
     }
 
     private fun updateRuang3(){
-        var nomor : String = ""
+        lateinit var nomor : Pasien
         FirebaseDatabase
             .getInstance()
             .getReference("RUANG_3").addValueEventListener(
@@ -120,12 +114,14 @@ class QueueFragment : Fragment(), View.OnClickListener {
                             Log.d("cek nomor", "aye aye")
 
                             if (data != null) {
-                                nomor = data.no_antrian
+                                nomor = data
                                 Log.d("nomor ruang 3", "$nomor")
                             }
 
                         }
-                        num_room_3.text = nomor
+                        num_room_3.text = nomor.no_antrian
+                        tv_nama3.text = nomor.nama
+                        tv_nik3.text = nomor.nik
                     }
                     override fun onCancelled(p0: DatabaseError) {
                         Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT)
@@ -136,7 +132,7 @@ class QueueFragment : Fragment(), View.OnClickListener {
     }
 
     private fun updateRuang4(){
-        var nomor : String = ""
+        lateinit var nomor : Pasien
         FirebaseDatabase
             .getInstance()
             .getReference("RUANG_4").addValueEventListener(
@@ -149,12 +145,14 @@ class QueueFragment : Fragment(), View.OnClickListener {
                             Log.d("cek nomor", "aye aye")
 
                             if (data != null) {
-                                nomor = data.no_antrian
+                                nomor = data
                                 Log.d("nomor ruang 4", "$nomor")
                             }
 
                         }
-                        num_room_4.text = nomor
+                        num_room_4.text = nomor.no_antrian
+                        tv_nama4.text = nomor.nama
+                        tv_nik4.text = nomor.nik
                     }
                     override fun onCancelled(p0: DatabaseError) {
                         Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT)
@@ -165,7 +163,7 @@ class QueueFragment : Fragment(), View.OnClickListener {
     }
 
     private fun updateRuang5(){
-        var nomor : String = ""
+        lateinit var nomor : Pasien
         FirebaseDatabase
             .getInstance()
             .getReference("RUANG_5").addValueEventListener(
@@ -178,12 +176,14 @@ class QueueFragment : Fragment(), View.OnClickListener {
                             Log.d("cek nomor", "aye aye")
 
                             if (data != null) {
-                                nomor = data.no_antrian
+                                nomor = data
                                 Log.d("nomor ruang 5", "$nomor")
                             }
 
                         }
-                        num_room_5.text = nomor
+                        num_room_5.text = nomor.no_antrian
+                        tv_nama5.text = nomor.nama
+                        tv_nik5.text = nomor.nik
                     }
                     override fun onCancelled(p0: DatabaseError) {
                         Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT)
@@ -194,7 +194,7 @@ class QueueFragment : Fragment(), View.OnClickListener {
     }
 
     private fun updateRuang6(){
-        var nomor : String = ""
+        lateinit var nomor : Pasien
         FirebaseDatabase
             .getInstance()
             .getReference("RUANG_6").addValueEventListener(
@@ -207,12 +207,14 @@ class QueueFragment : Fragment(), View.OnClickListener {
                             Log.d("cek nomor", "aye aye")
 
                             if (data != null) {
-                                nomor = data.no_antrian
+                                nomor = data
                                 Log.d("nomor ruang 6", "$nomor")
                             }
 
                         }
-                        num_room_6.text = nomor
+                        num_room_6.text = nomor.no_antrian
+                        tv_nama6.text = nomor.nama
+                        tv_nik6.text = nomor.nik
                     }
                     override fun onCancelled(p0: DatabaseError) {
                         Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT)
@@ -220,14 +222,6 @@ class QueueFragment : Fragment(), View.OnClickListener {
                 }
             )
 
-    }
-
-    override fun onClick(v: View) {
-        when(v.id){
-            R.id.btnOpenDrawerInQueue -> {
-                drawerLayout.openDrawer(GravityCompat.START)
-            }
-        }
     }
 
 }
