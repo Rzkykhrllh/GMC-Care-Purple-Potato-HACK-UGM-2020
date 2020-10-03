@@ -13,6 +13,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.purplepotato.gmccareadmin.fragment.Antrian
+import com.purplepotato.gmccareadmin.fragment.RuanganFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -23,36 +25,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        FirebaseApp.initializeApp(this);
-        rv_queue.layoutManager =  LinearLayoutManager(this) //ngeset recycler view
-        getdata()
+        FirebaseApp.initializeApp(this)
+        setUpTabs()
     }
 
-    private fun getdata() {
-        FirebaseDatabase
-            .getInstance()
-            .getReference("Antrian").
-            addValueEventListener(object : ValueEventListener {
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                Log.d("Error","Gagal ambil data dari firebase")
-            }
-
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                dataList.clear()
-                for (getdatasnapshot in dataSnapshot.children){
-                    var film =  getdatasnapshot.getValue(Pasien::class.java)
-                    dataList.add(film!!)
-                }
-
-                rv_queue.adapter = QueueAdapter(dataList){
-                    //var intent : Intent = Intent(this, DetailActivity::class.java).putExtra("data", it)
-                    //startActivity(intent)
-                }
-
-            }
-
-        })
+    private fun setUpTabs(){
+        val adapter = ViewPagerAdapter(supportFragmentManager)
+        adapter.addFragment(Antrian(), "Antrian Pasien")
+        adapter.addFragment(RuanganFragment(), "Ruanan")
+        viewPager.adapter = adapter
+        tabs.setupWithViewPager(viewPager)
     }
+
+
 }
