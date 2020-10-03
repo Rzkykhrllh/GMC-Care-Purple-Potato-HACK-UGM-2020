@@ -77,7 +77,7 @@
     </fragment>
     <fragment
         android:id="@+id/verificationFragment"
-        android:name="com.purplepotato.gmccare.screen.VerificationFragment"
+        android:name="com.purplepotato.gmccare.screen.verification.VerificationFragment"
         android:label="fragment_verification"
         tools:layout="@layout/fragment_verification" >
         <action

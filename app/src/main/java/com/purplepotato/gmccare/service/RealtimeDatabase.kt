@@ -23,4 +23,8 @@ class RealtimeDatabase {
         database.child("users").child(userId).setValue(user)
     }
 
+    fun writeUserPhoto(url:String){
+        database.child("users").child(userId).child("photo_url").setValue(url)
+    }
+
 }
