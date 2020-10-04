@@ -44,6 +44,7 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         btnBackToLoginFragment.setOnClickListener(this)
         tvBackToLoginFragment.setOnClickListener(this)
         et_birth_date.setOnClickListener(this)
+        btnSetBirthDate.setOnClickListener(this)
         calendar = Calendar.getInstance()
         getSignUpState()
 
@@ -55,7 +56,7 @@ class SignUpFragment : Fragment(), View.OnClickListener {
             R.id.btnSignUp -> signUp()
             R.id.btnBackToLoginFragment -> requireActivity().onBackPressed()
             R.id.tvBackToLoginFragment -> requireActivity().onBackPressed()
-            R.id.et_birth_date -> {
+            R.id.btnSetBirthDate -> {
                 val dataSetListener =
                     DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                         calendar.set(Calendar.YEAR, year)
@@ -68,6 +69,20 @@ class SignUpFragment : Fragment(), View.OnClickListener {
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)).show()
+            }
+            R.id.et_birth_date->{
+                val dataSetListener =
+                    DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                        calendar.set(Calendar.YEAR, year)
+                        calendar.set(Calendar.MONTH,monthOfYear)
+                        calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+                        updateDateInView()
+                    }
+
+                DatePickerDialog(requireContext(),dataSetListener,
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH)).show()
             }
         }
     }
