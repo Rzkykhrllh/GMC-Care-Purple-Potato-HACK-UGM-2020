@@ -10,15 +10,19 @@ import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.purplepotato.gmccare.R
+import com.purplepotato.gmccare.State
 import com.purplepotato.gmccare.model.Nomor
 import com.purplepotato.gmccare.model.Pasien
+import com.purplepotato.gmccare.model.User
 import com.purplepotato.gmccare.pref.Preferences
+import com.purplepotato.gmccare.service.RealtimeDatabase
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
@@ -29,7 +33,16 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var sharedPreferences: Preferences
+    private lateinit var viewModel: HomeViewModel
+    private var user: User? = null
     var number = "0"
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val fbDatabase = RealtimeDatabase()
+        val viewModelFactory = HomeViewModelFactory(fbDatabase)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +62,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         btnCancelQueue.setOnClickListener(this)
 
         isAlreadyHaveQueueNumber()
+        getUserRequestState()
     }
 
     override fun onClick(v: View) {
@@ -65,29 +79,46 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 takeNumber()
             }
 
-
-            R.id.btnCancelQueue -> {
-              R.id.btnCancelQueue -> showCancelQueueAlertDialog()
-            }
+            R.id.btnCancelQueue -> showCancelQueueAlertDialog()
         }
     }
+
+    private fun getUserRequestState() {
+        viewModel.getUserProfileState().observe(viewLifecycleOwner, { response ->
+            when (response) {
+                is State.OnSuccess -> {
+                    showLoading(false)
+                    user = response.data
+                }
+                is State.OnLoading -> {
+                    showLoading(true)
+                }
+                is State.OnError -> {
+                    showLoading(false)
+                }
+            }
+        })
+    }
+
 
     private fun showCancelQueueAlertDialog() {
         val dialog = AlertDialog.Builder(requireContext())
         dialog.setTitle("Apa Anda yakin?")
         dialog.setMessage("Membatalkan antrian")
         dialog.setPositiveButton("Ya") { _, _ ->
-            removeData(sharedPreferences.getUserQueueNumber().toInt()) //menghapus data user dari database
+            removeData(
+                sharedPreferences.getUserQueueNumber().toInt()
+            ) //menghapus data user dari database
             sharedPreferences.setIsQueued(false)
             sharedPreferences.setUserQueueNumber(-1)
             isAlreadyHaveQueueNumber()
 
         }
-        dialog.setNegativeButton("Tidak") { _, _-> }
+        dialog.setNegativeButton("Tidak") { _, _ -> }
         dialog.show()
     }
 
-    fun makeUser(): Pasien {
+    private fun makeUser(): Pasien {
         //Fungsi untuk ngambil data pasien dari data yang sudah di daftarkan
         return Pasien("Airu", "12345", "WAITING")
     }
@@ -96,6 +127,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private fun takeNumber() {
         //fungsi untuk mengambil nomor antrian dari database
         var nomor = "-2"
+        viewModel.getUserProfile()
 
         FirebaseDatabase
             .getInstance()
@@ -112,7 +144,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
                                 nomor = data.no_antrian
                                 Log.d("Ambil nomor", "$nomor")
 
-                                ToQueue(nomor, Pasien("Airu", "12345", "$nomor", "WAITING"))
+                                toQueue(
+                                    nomor,
+                                    Pasien(user!!.name as String, user!!.nik as String, nomor, "WAITING")
+                                )
                                 sharedPreferences.setIsQueued(true)
                                 sharedPreferences.setUserQueueNumber(nomor.toInt())
                                 isAlreadyHaveQueueNumber()
@@ -153,7 +188,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun ToQueue(no: String, pasien: Pasien) {
+    private fun toQueue(no: String, pasien: Pasien) {
         //fungsi untuk menambahkan data diri ke antiran
 
         FirebaseDatabase
@@ -181,11 +216,21 @@ class HomeFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun removeData(no : Int){
+    private fun removeData(no: Int) {
         FirebaseDatabase.getInstance()
             .getReference("Antrian")
-            .child("${no}")
+            .child("$no")
             .removeValue()
     }
 
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            getUserProfileLoadingFrame.visibility = View.VISIBLE
+            getUserProfileProgressBar.visibility = View.VISIBLE
+        } else {
+            getUserProfileLoadingFrame.visibility = View.GONE
+            getUserProfileProgressBar.visibility = View.GONE
+
+        }
+    }
 }
