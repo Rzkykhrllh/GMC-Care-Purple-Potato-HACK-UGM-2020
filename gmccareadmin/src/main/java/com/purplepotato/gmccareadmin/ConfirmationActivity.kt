@@ -43,9 +43,10 @@ class ConfirmationActivity : AppCompatActivity() {
 
         map["nama"] = nama
         map["no_antrian"] = no
-        map["status"] = "Calling"
+        map["status"] = "CALLING"
         map["nik"] = nik
 
+        //Update Ruangan
         FirebaseDatabase.getInstance().reference //update saldo
             .child("RUANG_" + "${ruang}")
             .child("0")
@@ -53,14 +54,21 @@ class ConfirmationActivity : AppCompatActivity() {
 
         Log.d("berhasil oper data", "ruang 1")
 
+        //Hapus dari antrian
         FirebaseDatabase.getInstance()
             .getReference("Antrian")
             .child("${no}")
             .removeValue()
 
+        //Taruh di calling
+        map["status"] = ruang.toString()
+        FirebaseDatabase.getInstance().reference //update saldo
+            .child("CALLING")
+            .updateChildren(map as Map<String, Any>)
+
         Log.d("berhasil hapus data", "ruang 1")
         //startActivity(Intent(context, dmmyactivity::class.java))
-        Toast.makeText(this, "Berhasil memanggil Pasien ke ruang 1", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Berhasil memanggil Pasien ke ruang $ruang", Toast.LENGTH_LONG).show()
     }
 
     private fun getData() {
