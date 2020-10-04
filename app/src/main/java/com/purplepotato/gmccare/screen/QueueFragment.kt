@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,11 +21,16 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.purplepotato.gmccare.R
 import com.purplepotato.gmccare.model.Pasien
+import com.purplepotato.gmccare.pref.Preferences
 import kotlinx.android.synthetic.main.fragment_queue.*
+import java.util.*
+
 
 class QueueFragment : Fragment(), View.OnClickListener {
 
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var sharedPreferences: Preferences
+    private var timeLeftInMillis = START_TIMER
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,10 +41,22 @@ class QueueFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        sharedPreferences = Preferences(requireContext())
         drawerLayout = requireActivity().findViewById(R.id.drawer_layout)
 
         btnOpenDrawerInQueue.setOnClickListener(this)
+
+        val isQueued = sharedPreferences.getIsQueued()
+
+        if (isQueued) {
+            tvNotQueued.visibility = View.GONE
+            val num = sharedPreferences.getUserQueueNumber()
+            tvYourQueueNumber.text = num.toString()
+        } else {
+            tvYourQueueNumber.visibility = View.INVISIBLE
+            tv_nomor_mu.visibility = View.INVISIBLE
+            tvNotQueued.visibility = View.VISIBLE
+        }
 
         Log.d("queue", "udah di queue fragment")
         updateRuang1()
@@ -48,7 +66,11 @@ class QueueFragment : Fragment(), View.OnClickListener {
         updateRuang5()
         updateRuang6()
 
-        sendNotification("Nomor antrian anda akan segera dipanggil")
+      /*
+       sendNotification("Nomor antrian anda akan segera dipanggil") --> kirim notifikasi beserta pesannya
+
+        setTimer() --> untuk set timer 10 menit
+        */
     }
 
     private fun updateRuang1() {
@@ -264,10 +286,34 @@ class QueueFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    private fun setTimer() {
+        tvTimer.visibility = View.VISIBLE
+        val timer = object : CountDownTimer(START_TIMER, 1_000) {
+            override fun onTick(millisUntilFinished: Long) {
+                timeLeftInMillis = millisUntilFinished
+                updateCountDownText()
+            }
+
+            override fun onFinish() {
+                tvTimer.visibility = View.GONE
+            }
+        }.start()
+    }
+
+    private fun updateCountDownText() {
+        val minutes = (timeLeftInMillis / 1000 / 60).toInt()
+        val second = ((timeLeftInMillis / 1000) % 60).toInt()
+
+        val timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, second)
+
+        tvTimer.text = timeLeftFormatted
+    }
+
     companion object {
         private const val CHANNEL_ID = "channel_1"
         private const val CHANNEL_NAME = "notification"
         private const val NOTIFICATION_ID = 1
+        private const val START_TIMER: Long = 1_000 * 60 * 10
     }
 
 }

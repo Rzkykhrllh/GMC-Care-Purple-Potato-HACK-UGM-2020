@@ -21,13 +21,13 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/montserrat_semi_bold"
         android:text="Nomor antrian"
         android:textColor="@color/colorBlack"
-        android:layout_marginBottom="16dp"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@id/tvCurrentTicketNumber"
         app:layout_constraintBottom_toTopOf="@id/tvCurrentTicketNumber"
+        app:layout_constraintEnd_toEndOf="@id/tvCurrentTicketNumber"
         app:layout_constraintStart_toStartOf="@id/tvCurrentTicketNumber" />
 
 
@@ -39,10 +39,10 @@
         android:text="A97"
         android:textColor="@color/colorBlack"
         android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_room"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tv_room"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_title2"
@@ -61,12 +61,12 @@
         android:id="@+id/tv_room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/box_room_1"
         android:layout_marginBottom="24dp"
         android:fontFamily="@font/montserrat_semi_bold"
         android:text="Ruang Periksa:"
         android:textColor="@color/colorBlack"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/box_room_1"
         app:layout_constraintStart_toStartOf="@id/box_room_1" />
 
     <androidx.cardview.widget.CardView
@@ -109,13 +109,13 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="18dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="A71"
                 android:textColor="@color/colorWhite"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_room_1" />
+                app:layout_constraintTop_toBottomOf="@id/tv_room_1"
+                tools:text="A71" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -160,13 +160,13 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="18dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="A71"
                 android:textColor="@color/colorWhite"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_room_2" />
+                app:layout_constraintTop_toBottomOf="@id/tv_room_2"
+                tools:text="A71" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -211,13 +211,13 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="18dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="A71"
                 android:textColor="@color/colorWhite"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_room_3" />
+                app:layout_constraintTop_toBottomOf="@id/tv_room_3"
+                tools:text="A71" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -262,13 +262,13 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="18dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="A71"
                 android:textColor="@color/colorWhite"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_room_4" />
+                app:layout_constraintTop_toBottomOf="@id/tv_room_4"
+                tools:text="A71" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -313,13 +313,13 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="18dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="A71"
                 android:textColor="@color/colorWhite"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_room_5" />
+                app:layout_constraintTop_toBottomOf="@id/tv_room_5"
+                tools:text="A71" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -364,13 +364,13 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="18dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="A71"
                 android:textColor="@color/colorWhite"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_room_6" />
+                app:layout_constraintTop_toBottomOf="@id/tv_room_6"
+                tools:text="A71" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -399,15 +399,41 @@
         app:layout_constraintTop_toTopOf="@id/bottom_box" />
 
     <TextView
+        android:id="@+id/tvYourQueueNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_semi_bold"
-        android:text="A97"
         android:textColor="@color/colorWhite"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="@+id/bottom_box"
         app:layout_constraintEnd_toEndOf="@id/bottom_box"
         app:layout_constraintStart_toEndOf="@id/tv_nomor_mu"
-        app:layout_constraintTop_toTopOf="@id/bottom_box" />
+        app:layout_constraintTop_toTopOf="@id/bottom_box"
+        tools:text="A97" />
 
+    <TextView
+        android:id="@+id/tvTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@id/tv_title2"
+        app:layout_constraintStart_toStartOf="@id/tv_title2"
+        app:layout_constraintTop_toBottomOf="@id/tv_title2"
+        tools:text="00:00" />
+
+    <TextView
+        android:id="@+id/tvNotQueued"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:text="Anda belum dapat antrian"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/bottom_box"
+        app:layout_constraintEnd_toEndOf="@id/bottom_box"
+        app:layout_constraintStart_toStartOf="@id/bottom_box"
+        app:layout_constraintTop_toTopOf="@id/bottom_box" />
 </androidx.constraintlayout.widget.ConstraintLayout>

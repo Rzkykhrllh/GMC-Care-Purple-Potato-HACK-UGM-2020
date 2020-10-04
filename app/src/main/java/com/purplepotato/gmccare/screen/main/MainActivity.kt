@@ -15,6 +15,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.purplepotato.gmccare.R
 import com.purplepotato.gmccare.State
+import com.purplepotato.gmccare.pref.Preferences
 import com.purplepotato.gmccare.service.FirebaseAuthentication
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.change_password_bottom_sheet.view.*
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var navController: NavController
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var viewModel: MainViewModel
+    private lateinit var sharedPreferences: Preferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +48,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         bottomSheetView.btnChangePassword.setOnClickListener {
             val email = bottomSheetView.et_email_password_recovery.text.toString().trim()
 
-            if(email.isNotEmpty()){
+            if (email.isNotEmpty()) {
                 viewModel.resetPasswordEmail(email)
             } else {
                 bottomSheetView.et_email_password_recovery.error = "Field ini tidak boleh kosong"
@@ -55,7 +57,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             bottomSheetView.et_email_password_recovery.setText("")
             bottomSheetDialog.hide()
         }
+
         forgotPasswordState()
+
+        sharedPreferences = Preferences(this)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -115,8 +120,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun showSignOutAlertDialog() {
 
         val alertDialog = AlertDialog.Builder(this)
-        alertDialog.setMessage("Are you sure want to sign out?")
-        alertDialog.setPositiveButton("Sign out") { _, _ ->
+        alertDialog.setMessage("Apa Anda yakin ingin keluar?")
+        alertDialog.setPositiveButton("Keluar") { _, _ ->
+            sharedPreferences.setIsQueued(false)
+            sharedPreferences.setUserQueueNumber(-1)
             viewModel.signOut()
 
             if (navController.currentDestination!!.id == R.id.queueFragment) {
@@ -126,7 +133,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             if (navController.currentDestination!!.id == R.id.homeFragment) {
                 navController.navigate(R.id.fromHomeToLoginFragment)
             }
-        }.setNegativeButton("Cancel") { _, _ -> }
+        }.setNegativeButton("Batal") { _, _ -> }
 
         alertDialog.show()
     }
@@ -135,7 +142,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         viewModel.getResetPasswordEmailState().observe(this, { response ->
             when (response) {
                 is State.OnSuccess -> {
-                    Toast.makeText(this, "Please check your email to change your password", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Cek email anda untuk mengganti password",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
 
                 is State.OnError -> {
