@@ -65,8 +65,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 takeNumber()
             }
 
-            R.id.btnCancelQueue -> showCancelQueueAlertDialog()
 
+            R.id.btnCancelQueue -> {
+              R.id.btnCancelQueue -> showCancelQueueAlertDialog()
+            }
         }
     }
 
@@ -75,10 +77,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
         dialog.setTitle("Apa Anda yakin?")
         dialog.setMessage("Membatalkan antrian")
         dialog.setPositiveButton("Ya") { _, _ ->
-            //belum ada logic untuk hapus antrian di firebase
+            removeData(sharedPreferences.getUserQueueNumber().toInt()) //menghapus data user dari database
             sharedPreferences.setIsQueued(false)
             sharedPreferences.setUserQueueNumber(-1)
             isAlreadyHaveQueueNumber()
+
         }
         dialog.setNegativeButton("Tidak") { _, _-> }
         dialog.show()
@@ -151,7 +154,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun ToQueue(no: String, pasien: Pasien) {
-        //fungsi untuk menambahkan datadiri ke antiran
+        //fungsi untuk menambahkan data diri ke antiran
 
         FirebaseDatabase
             .getInstance()
@@ -176,6 +179,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
             btnToQueue.visibility = View.VISIBLE
             btnCancelQueue.visibility = View.GONE
         }
+    }
+
+    private fun removeData(no : Int){
+        FirebaseDatabase.getInstance()
+            .getReference("Antrian")
+            .child("${no}")
+            .removeValue()
     }
 
 }

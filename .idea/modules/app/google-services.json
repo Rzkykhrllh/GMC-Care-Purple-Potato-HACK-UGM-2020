@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "259274901292",
+    "firebase_url": "https://gmc-care.firebaseio.com",
+    "project_id": "gmc-care",
+    "storage_bucket": "gmc-care.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:259274901292:android:65da051c7df5847650ce89",
+        "android_client_info": {
+          "package_name": "com.purplepotato.gmccare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "259274901292-clk5mlc98f2lin9l28ukk6a9jniab06j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.purplepotato.gmccare",
+            "certificate_hash": "286d9d491843614535c74edc2e6f1d8b2441c84d"
+          }
+        },
+        {
+          "client_id": "259274901292-ev26hmaj0s6ucp95mcta08ojud1jgtie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtSp96yPCFpL1xg5Pk91hXX7GWe7YAe8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "259274901292-ev26hmaj0s6ucp95mcta08ojud1jgtie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

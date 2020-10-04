@@ -59,6 +59,7 @@ class QueueFragment : Fragment(), View.OnClickListener {
         }
 
         Log.d("queue", "udah di queue fragment")
+        updateCalling()
         updateRuang1()
         updateRuang2()
         updateRuang3()
@@ -71,6 +72,33 @@ class QueueFragment : Fragment(), View.OnClickListener {
 
         setTimer() --> untuk set timer 10 menit
         */
+    }
+
+    private fun updateCalling() {
+        //function to update current number
+
+        FirebaseDatabase
+            .getInstance()
+            .reference
+            .child("CALLING").addValueEventListener(
+                object : ValueEventListener {
+                    override fun onDataChange(p0: DataSnapshot) {
+                        var temp = p0.getValue(Pasien::class.java)
+
+                        Log.d("nomer calling", "$temp")
+
+                        tvCurrentTicketNumber.text = temp?.no_antrian
+                        tv_title2.text = "silahkan menuju ke ruang ${temp?.status}"
+
+                        //entar manggil fungsi notif dan timer disini
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+                        Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            )
+
     }
 
     private fun updateRuang1() {
