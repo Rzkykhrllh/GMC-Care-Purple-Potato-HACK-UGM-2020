@@ -1,66 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+
+    android:id="@+id/box_room_1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:paddingVertical="8dp"
-    android:background="@color/colorAccent"
-    android:paddingHorizontal="16dp">
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:backgroundTint="@color/colorPrimary"
+    android:padding="8dp"
+    app:cardCornerRadius="12dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tv_room" 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/tvNomorAntrian"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:text="Nomor Antrian"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:fontFamily="@font/montserrat_medium"
-        />
-
-    <TextView
-        android:id="@+id/tvNomor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        tools:text="20"
-        app:layout_constraintTop_toBottomOf="@id/tvNomorAntrian"
-        app:layout_constraintStart_toStartOf="@id/tvNomorAntrian"
-        app:layout_constraintEnd_toEndOf="@id/tvNomorAntrian"
-        android:fontFamily="@font/montserrat_bold"
-        />
-
-    <ImageView
-        android:id="@+id/Garis"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:src="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvNomorAntrian"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginVertical="2dp"
-        android:layout_marginLeft="8dp"/>
-
-    <TextView
-        android:id="@+id/tvNama"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/Garis"
-        tools:text="Muhammad Rizky Khairullah"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/montserrat_semi_bold"/>
-
-    <TextView
-        android:id="@+id/tvNik"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/Garis"
-        app:layout_constraintTop_toBottomOf="@id/tvNama"
-        tools:text="19xxxxxxxx"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/montserrat_medium"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/highligt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:backgroundTint="@color/colorHighlight"
+            android:paddingHorizontal="8dp"
+            app:layout_constraintStart_toStartOf="parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_room_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/button_shape_highlight"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:paddingHorizontal="3dp"
+                android:paddingVertical="1dp"
+                android:text="No Antrian"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvNomor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="A71"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_room_1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvNama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Muhammad Rizy Khairullah"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/highligt1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNik"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="1234567890123456"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/highligt1"
+            app:layout_constraintTop_toBottomOf="@id/tvNama" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
