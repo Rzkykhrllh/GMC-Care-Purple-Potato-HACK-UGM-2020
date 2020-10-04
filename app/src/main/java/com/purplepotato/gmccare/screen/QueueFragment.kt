@@ -67,15 +67,11 @@ class QueueFragment : Fragment(), View.OnClickListener {
         updateRuang5()
         updateRuang6()
 
-      /*
-       sendNotification("Nomor antrian anda akan segera dipanggil") --> kirim notifikasi beserta pesannya
-
-        setTimer() --> untuk set timer 10 menit
-        */
     }
 
     private fun updateCalling() {
         //function to update current number
+        val userQueueNumber = sharedPreferences.getUserQueueNumber()
 
         FirebaseDatabase
             .getInstance()
@@ -83,12 +79,36 @@ class QueueFragment : Fragment(), View.OnClickListener {
             .child("CALLING").addValueEventListener(
                 object : ValueEventListener {
                     override fun onDataChange(p0: DataSnapshot) {
-                        var temp = p0.getValue(Pasien::class.java)
+                        val temp = p0.getValue(Pasien::class.java)
 
                         Log.d("nomer calling", "$temp")
 
-                        tvCurrentTicketNumber.text = temp?.no_antrian
-                        tv_title2.text = "silahkan menuju ke ruang ${temp?.status}"
+                        temp?.let {
+                            tvCurrentTicketNumber.text = temp.no_antrian
+                            tv_title2.text = "silahkan menuju ke ruang ${temp.status}"
+
+                            when (temp.no_antrian.toInt() - userQueueNumber) {
+                                10 -> {
+                                    sendNotification("10 nomor lagi menuju nomor anda")
+                                }
+
+                                5 -> {
+                                    sendNotification("5 nomor lagi menuju nomor anda")
+                                }
+
+                                3 -> {
+                                    sendNotification("3 nomor lagi menuju nomor anda")
+                                }
+
+                                1-> {
+                                    sendNotification("1 nomor lagi menuju nomor anda")
+                                }
+                                0->{
+                                    sendNotification("Nomor anda telah dipanggil")
+                                    setTimer()
+                                }
+                            }
+                        }
 
                         //entar manggil fungsi notif dan timer disini
                     }
@@ -286,7 +306,7 @@ class QueueFragment : Fragment(), View.OnClickListener {
 
         val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
             .setContentTitle("Reminder")
-            .setContentText("Nomor antrian anda akan segera dipanggil")
+            .setContentText(message)
             .setSmallIcon(R.drawable.ic_baseline_notifications)
             .setAutoCancel(true)
 

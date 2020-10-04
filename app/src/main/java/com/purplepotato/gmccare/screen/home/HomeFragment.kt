@@ -65,10 +65,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 takeNumber()
             }
 
-
-            R.id.btnCancelQueue -> {
               R.id.btnCancelQueue -> showCancelQueueAlertDialog()
-            }
         }
     }
 
@@ -87,7 +84,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         dialog.show()
     }
 
-    fun makeUser(): Pasien {
+    private fun makeUser(): Pasien {
         //Fungsi untuk ngambil data pasien dari data yang sudah di daftarkan
         return Pasien("Airu", "12345", "WAITING")
     }
@@ -184,7 +181,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private fun removeData(no : Int){
         FirebaseDatabase.getInstance()
             .getReference("Antrian")
-            .child("${no}")
+            .child("$no")
             .removeValue()
     }
 
