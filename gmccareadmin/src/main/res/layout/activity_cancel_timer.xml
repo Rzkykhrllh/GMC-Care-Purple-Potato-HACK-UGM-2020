@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mau pindah pasien bernomor"
+        android:text="Apakah pasien dengan no antrian"
         android:textAlignment="center"/>
 
     <TextView
@@ -35,35 +35,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nomor"
-        android:text="ke ruang nomor"/>
+        android:text="sudah datang ke ruang"/>
 
-    <Spinner
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/teks3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:id="@+id/spinner"/>
-
-    <!--<android.inputmethodservice.ExtractEditText
-        android:layout_width="200dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_height="wrap_content"
-
-        app:layout_constraintTop_toBottomOf="@id/teks3"
-        android:layout_marginTop="20dp"
-        android:id="@+id/et_nomor"
-        />-->
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/spinner"
+        app:layout_constraintTop_toBottomOf="@id/teks3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="panggil"
-        android:id="@+id/btn_panggil"
+        android:text="Ya, Matikan timer"
+        android:id="@+id/btn_ya"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

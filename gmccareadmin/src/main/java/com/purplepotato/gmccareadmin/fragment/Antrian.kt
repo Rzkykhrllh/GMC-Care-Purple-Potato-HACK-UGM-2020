@@ -36,12 +36,7 @@ import kotlinx.coroutines.launch
 class Antrian : Fragment() {
 
     private var dataList: ArrayList<Pasien> = ArrayList()
-    lateinit var myDialog: Dialog
-    val ruangan = listOf("Ruang 1", "Ruang 2", "Ruang 3", "Ruang 4", "Ruang 5", "Ruang 6")
-    var pilihRuangan = ""
 
-    lateinit var button: Button
-    var bottom_sheet_fragment = BottomSheetFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,12 +87,6 @@ class Antrian : Fragment() {
                                 .putExtra("nik", data.nik)
                                 .putExtra("status", data.status)
                             startActivity(intent)
-
-                            /*bottom_sheet_fragment.show(childFragmentManager, "yey")
-                            bottom_sheet_fragment.btnPanggil.setOnClickListener {
-                                Toast.makeText(context, "Bisa mencet", Toast.LENGTH_SHORT).show()
-                            }*/
-
                         }
 
                     }
@@ -105,9 +94,6 @@ class Antrian : Fragment() {
                 })
     }
 
-    private fun sheet() {
-
-    }
 
 
     private fun keRuang(data: Pasien, no_ruang: Int = 4) {
@@ -137,4 +123,5 @@ class Antrian : Fragment() {
         //startActivity(Intent(context, dmmyactivity::class.java))
         Toast.makeText(context, "Berhasil memanggil Pasien ke ruang 1", Toast.LENGTH_LONG).show()
     }
+
 }
