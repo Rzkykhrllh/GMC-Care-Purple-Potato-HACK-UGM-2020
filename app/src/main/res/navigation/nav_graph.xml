@@ -47,7 +47,7 @@
         <action
             android:id="@+id/fromQueueToHomeFragment"
             app:destination="@id/homeFragment"
-            app:popUpTo="@id/queueFragment"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/fromQueueToLoginFragment"
@@ -64,9 +64,7 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/toQueueFragment"
-            app:destination="@id/queueFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/queueFragment" />
         <action
             android:id="@+id/fromHomeToLoginFragment"
             app:destination="@id/loginFragment"
