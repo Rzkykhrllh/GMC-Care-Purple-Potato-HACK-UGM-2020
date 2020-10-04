@@ -1,5 +1,6 @@
 package com.purplepotato.gmccare.screen.home
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -64,13 +65,23 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 takeNumber()
             }
 
-            R.id.btnCancelQueue -> {
-                // hapus antrian
-                sharedPreferences.setIsQueued(false)
-                sharedPreferences.setUserQueueNumber(-1)
-                isAlreadyHaveQueueNumber()
-            }
+            R.id.btnCancelQueue -> showCancelQueueAlertDialog()
+
         }
+    }
+
+    private fun showCancelQueueAlertDialog() {
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.setTitle("Apa Anda yakin?")
+        dialog.setMessage("Membatalkan antrian")
+        dialog.setPositiveButton("Ya") { _, _ ->
+            //belum ada logic untuk hapus antrian di firebase
+            sharedPreferences.setIsQueued(false)
+            sharedPreferences.setUserQueueNumber(-1)
+            isAlreadyHaveQueueNumber()
+        }
+        dialog.setNegativeButton("Tidak") { _, _-> }
+        dialog.show()
     }
 
     fun makeUser(): Pasien {
@@ -107,6 +118,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                             }
                         }
                     }
+
                     override fun onCancelled(p0: DatabaseError) {
                         Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT).show()
                     }
@@ -115,7 +127,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         Log.d("nomor akhir", "$nomor")
     }
 
-    private fun updateNumber(number_now : Int) {
+    private fun updateNumber(number_now: Int) {
         //fungsi untuk update nomor di database, setelah kita ambil
 
         var map = mutableMapOf<String, String>()
@@ -132,7 +144,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
         Log.d("pindah kuy", "mau pindah ke queue fragment nomor")
 
-        CoroutineScope(Main).launch{
+        CoroutineScope(Main).launch {
             delay(2000)
             findNavController().navigate(R.id.toQueueFragment)
         }
@@ -147,16 +159,17 @@ class HomeFragment : Fragment(), View.OnClickListener {
             .child(no.toString())
             .setValue(pasien)
             .addOnSuccessListener {
-                Toast.makeText(activity, "Silahkan tunggu nomormu dipanggil", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, "Silahkan tunggu nomormu dipanggil", Toast.LENGTH_LONG)
+                    .show()
                 sharedPreferences.setUserQueueNumber(pasien.no_antrian.toInt())
                 Log.d("antri", "Berhasil antri dengan nomor $no")
             }
 
     }
 
-    private fun isAlreadyHaveQueueNumber(){
+    private fun isAlreadyHaveQueueNumber() {
         val status = sharedPreferences.getIsQueued()
-        if (status){
+        if (status) {
             btnToQueue.visibility = View.GONE
             btnCancelQueue.visibility = View.VISIBLE
         } else {
