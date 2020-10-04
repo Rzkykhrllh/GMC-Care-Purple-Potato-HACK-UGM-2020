@@ -152,8 +152,8 @@ class LoginFragment : Fragment(), View.OnClickListener {
                     showLoading(false)
                     Toast.makeText(
                         activity,
-                        "Please check your email to change your password",
-                        Toast.LENGTH_SHORT
+                        "Cek email anda untuk membuat ulang password",
+                        Toast.LENGTH_LONG
                     ).show()
 
                 }

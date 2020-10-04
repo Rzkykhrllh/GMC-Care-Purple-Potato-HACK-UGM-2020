@@ -2,18 +2,22 @@ package com.purplepotato.gmccare.screen.home
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.purplepotato.gmccare.R
 import com.purplepotato.gmccare.model.Nomor
 import com.purplepotato.gmccare.model.Pasien
+import com.purplepotato.gmccare.pref.Preferences
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
@@ -23,6 +27,7 @@ import kotlinx.coroutines.launch
 class HomeFragment : Fragment(), View.OnClickListener {
 
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var sharedPreferences: Preferences
     var number = "0"
 
     override fun onCreateView(
@@ -34,19 +39,15 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPreferences = Preferences(requireContext())
 
         drawerLayout = requireActivity().findViewById(R.id.drawer_layout)
 
         btnOpenDrawerInHome.setOnClickListener(this)
+        btnToQueue.setOnClickListener(this)
+        btnCancelQueue.setOnClickListener(this)
 
-        btnToQueue.setOnClickListener {
-            Log.d("button", "queue")
-            val pasien = makeUser()
-
-
-            takeNumber()
-
-        }
+        isAlreadyHaveQueueNumber()
     }
 
     override fun onClick(v: View) {
@@ -54,6 +55,20 @@ class HomeFragment : Fragment(), View.OnClickListener {
             R.id.btnOpenDrawerInHome -> {
                 drawerLayout.openDrawer(GravityCompat.START)
                 Log.d("button", "menu")
+            }
+
+            R.id.btnToQueue -> {
+                Log.d("button", "queue")
+                val pasien = makeUser()
+
+                takeNumber()
+            }
+
+            R.id.btnCancelQueue -> {
+                // hapus antrian
+                sharedPreferences.setIsQueued(false)
+                sharedPreferences.setUserQueueNumber(-1)
+                isAlreadyHaveQueueNumber()
             }
         }
     }
@@ -84,13 +99,16 @@ class HomeFragment : Fragment(), View.OnClickListener {
                                 Log.d("Ambil nomor", "$nomor")
 
                                 ToQueue(nomor, Pasien("Airu", "12345", "$nomor", "WAITING"))
+                                sharedPreferences.setIsQueued(true)
+                                sharedPreferences.setUserQueueNumber(nomor.toInt())
+                                isAlreadyHaveQueueNumber()
                                 updateNumber(nomor.toInt())
 
                             }
                         }
                     }
                     override fun onCancelled(p0: DatabaseError) {
-                        Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT)
+                        Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT).show()
                     }
                 }
             )
@@ -118,7 +136,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
             delay(2000)
             findNavController().navigate(R.id.toQueueFragment)
         }
-        //startActivity(Intent(context, dmmyactivity::class.java))
     }
 
     private fun ToQueue(no: String, pasien: Pasien) {
@@ -130,11 +147,22 @@ class HomeFragment : Fragment(), View.OnClickListener {
             .child(no.toString())
             .setValue(pasien)
             .addOnSuccessListener {
-                Toast.makeText(activity, "Silahkan tunggu nomormu dipanggil", Toast.LENGTH_LONG)
+                Toast.makeText(activity, "Silahkan tunggu nomormu dipanggil", Toast.LENGTH_LONG).show()
+                sharedPreferences.setUserQueueNumber(pasien.no_antrian.toInt())
                 Log.d("antri", "Berhasil antri dengan nomor $no")
             }
 
-        // findNavController().navigate(R.id.toQueueFragment)
+    }
+
+    private fun isAlreadyHaveQueueNumber(){
+        val status = sharedPreferences.getIsQueued()
+        if (status){
+            btnToQueue.visibility = View.GONE
+            btnCancelQueue.visibility = View.VISIBLE
+        } else {
+            btnToQueue.visibility = View.VISIBLE
+            btnCancelQueue.visibility = View.GONE
+        }
     }
 
 }

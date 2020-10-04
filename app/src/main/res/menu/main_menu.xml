@@ -3,21 +3,21 @@
 
     <item
         android:id="@+id/homeFragment"
-        android:title="Home" />
+        android:title="Beranda" />
 
     <item
         android:id="@+id/queueFragment"
-        android:title="Queue" />
+        android:title="Antrian" />
 
-    <item android:title="Settings">
+    <item android:title="Pengaturan">
         <menu>
             <item
                 android:id="@+id/changePassword"
-                android:title="Change Password" />
+                android:title="Ganti Password" />
 
             <item
                 android:id="@+id/signOut"
-                android:title="Sign Out" />
+                android:title="Keluar" />
         </menu>
     </item>
 

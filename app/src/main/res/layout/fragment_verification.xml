@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="36dp"
-            android:text="upload a photo of yourself holding your\nidentity document next to your face "
+            android:text="Unggah foto diri Anda memegang kartu identitas\n di samping wajah Anda"
             android:textAlignment="center"
             android:textSize="14sp" />
 
