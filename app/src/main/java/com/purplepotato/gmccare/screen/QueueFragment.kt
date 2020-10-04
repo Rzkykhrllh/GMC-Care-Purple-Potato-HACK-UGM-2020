@@ -89,6 +89,8 @@ class QueueFragment : Fragment(), View.OnClickListener {
 
                         tvCurrentTicketNumber.text = temp?.no_antrian
                         tv_title2.text = "silahkan menuju ke ruang ${temp?.status}"
+
+                        //entar manggil fungsi notif dan timer disini
                     }
 
                     override fun onCancelled(p0: DatabaseError) {
