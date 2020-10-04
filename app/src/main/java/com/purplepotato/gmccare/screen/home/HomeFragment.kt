@@ -66,6 +66,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
             R.id.btnCancelQueue -> {
                 // hapus antrian
+                removeData(sharedPreferences.getUserQueueNumber().toInt()) //menghapus data user dari database
                 sharedPreferences.setIsQueued(false)
                 sharedPreferences.setUserQueueNumber(-1)
                 isAlreadyHaveQueueNumber()
@@ -139,7 +140,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun ToQueue(no: String, pasien: Pasien) {
-        //fungsi untuk menambahkan datadiri ke antiran
+        //fungsi untuk menambahkan data diri ke antiran
 
         FirebaseDatabase
             .getInstance()
@@ -163,6 +164,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
             btnToQueue.visibility = View.VISIBLE
             btnCancelQueue.visibility = View.GONE
         }
+    }
+
+    private fun removeData(no : Int){
+        FirebaseDatabase.getInstance()
+            .getReference("Antrian")
+            .child("${no}")
+            .removeValue()
     }
 
 }
