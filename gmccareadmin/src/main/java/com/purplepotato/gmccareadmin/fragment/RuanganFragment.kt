@@ -97,9 +97,9 @@ class RuanganFragment : Fragment() {
                 .putExtra("status", "${pasien4.status}")
             startActivity(intent)
         }
-        btn_ruang1.setOnClickListener {
+        btn_ruang5.setOnClickListener {
             var intent : Intent = Intent(context, CancelTimerActivity::class.java)
-                .putExtra("ruang","1")
+                .putExtra("ruang","5")
                 .putExtra("nama", "${pasien5.nama}")
                 .putExtra("nik", "${pasien5.nik}")
                 .putExtra("no", "${pasien5.no_antrian}")
