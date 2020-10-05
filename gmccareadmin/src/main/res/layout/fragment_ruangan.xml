@@ -15,14 +15,14 @@
             android:id="@+id/tv_room"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
             android:layout_marginBottom="24dp"
+            android:background="@color/colorAccent"
             android:fontFamily="@font/montserrat_semi_bold"
             android:text="Ruang Periksa:"
             android:textColor="@color/colorBlack"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@id/box_room_1"
-            android:background="@color/colorAccent"
-            android:layout_marginTop="60dp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
@@ -41,11 +41,12 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btn_ruang1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/highligt1"
+                    android:id="@+id/highlight1"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:background="@color/colorPrimary"
@@ -93,11 +94,11 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="6dp"
                     android:fontFamily="@font/montserrat_semi_bold"
-                    android:text="Muhammad Rizy Khairullah"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toEndOf="@+id/highligt1"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toEndOf="@+id/highlight1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Muhammad Rizky Khairullah" />
 
                 <TextView
                     android:id="@+id/tv_nik1"
@@ -105,25 +106,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="1234567890123456"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toEndOf="@+id/highligt1"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nama1" />
+                    app:layout_constraintStart_toEndOf="@+id/highlight1"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nama1"
+                    tools:text="1234567890123456" />
 
                 <TextView
                     android:id="@+id/tv_timer1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nik1"
-                    app:layout_constraintStart_toStartOf="@id/tv_nik1"
-                    android:text="waktu"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="3dp"
                     android:layout_marginBottom="6dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/colorWhite"
-                    android:layout_marginTop="3dp"
-                    />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_nik1"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nik1"
+                    tools:text="waktu" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -145,7 +145,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btn_ruang2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -197,11 +198,11 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="6dp"
                     android:fontFamily="@font/montserrat_semi_bold"
-                    android:text="Muhammad Rizy Khairullah"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/highligt2"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Muhammad Rizky Khairullah" />
 
                 <TextView
                     android:id="@+id/tv_nik2"
@@ -209,25 +210,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="1234567890123456"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/highligt2"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nama2" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_nama2"
+                    tools:text="1234567890123456" />
 
                 <TextView
                     android:id="@+id/tv_timer2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nik2"
-                    app:layout_constraintStart_toStartOf="@id/tv_nik2"
-                    android:text="waktu"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="3dp"
                     android:layout_marginBottom="6dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/colorWhite"
-                    android:layout_marginTop="3dp"
-                    />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_nik2"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nik2"
+                    tools:text="waktu" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -250,19 +250,20 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btn_ruang3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/highligt3"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:background="@color/colorPrimary"
                     android:backgroundTint="@color/colorHighlight"
                     android:paddingHorizontal="8dp"
-                    app:layout_constraintStart_toStartOf="parent">
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/tv_room_3"
@@ -302,11 +303,11 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="6dp"
                     android:fontFamily="@font/montserrat_semi_bold"
-                    android:text="Muhammad Rizy Khairullah"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/highligt3"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Muhammad Rizy Khairullah" />
 
                 <TextView
                     android:id="@+id/tv_nik3"
@@ -314,25 +315,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="1234567890123456"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/highligt3"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nama3" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_nama3"
+                    tools:text="1234567890123456" />
 
                 <TextView
                     android:id="@+id/tv_timer3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nik3"
-                    app:layout_constraintStart_toStartOf="@id/tv_nik3"
-                    android:text="waktu"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="3dp"
                     android:layout_marginBottom="6dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/colorWhite"
-                    android:layout_marginTop="3dp"
-                    />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_nik3"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nik3"
+                    tools:text="waktu" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -355,7 +355,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btn_ruang4"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -407,11 +408,11 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="6dp"
                     android:fontFamily="@font/montserrat_semi_bold"
-                    android:text="Muhammad Rizy Khairullah"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/highligt4"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Muhammad Rizky Khairullah" />
 
                 <TextView
                     android:id="@+id/tv_nik4"
@@ -419,25 +420,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="1244567890124456"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/highligt4"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nama4" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_nama4"
+                    tools:text="1244567890124456" />
 
                 <TextView
                     android:id="@+id/tv_timer4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nik4"
-                    app:layout_constraintStart_toStartOf="@id/tv_nik4"
-                    android:text="waktu"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="3dp"
                     android:layout_marginBottom="6dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/colorWhite"
-                    android:layout_marginTop="3dp"
-                    />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_nik4"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nik4"
+                    tools:text="waktu" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -460,7 +460,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btn_ruang5"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -509,40 +510,39 @@
                     android:id="@+id/tv_nama5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="6dp"
                     android:fontFamily="@font/montserrat_semi_bold"
-                    android:text="Muhammad Rizy Khairullah"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/highligt5"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Muhammad Rizky Khairullah" />
 
                 <TextView
                     android:id="@+id/tv_nik5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="1244567890124456"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/highligt5"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nama5" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_nama5"
+                    tools:text="1244567890124456" />
 
                 <TextView
                     android:id="@+id/tv_timer5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nik5"
-                    app:layout_constraintStart_toStartOf="@id/tv_nik5"
-                    android:text="waktu"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="3dp"
                     android:layout_marginBottom="6dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/colorWhite"
-                    android:layout_marginTop="3dp"
-                    />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_nik5"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nik5"
+                    tools:text="waktu" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -565,7 +565,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btn_ruang6"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -614,39 +615,39 @@
                     android:id="@+id/tv_nama6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="6dp"
                     android:fontFamily="@font/montserrat_semi_bold"
-                    android:text="Muhammad Rizy Khairullah"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/highligt6"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Muhammad Rizky Khairullah" />
 
                 <TextView
                     android:id="@+id/tv_nik6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="1244567890124456"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/highligt6"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nama6" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_nama6"
+                    tools:text="1244567890124456" />
+
                 <TextView
                     android:id="@+id/tv_timer6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nik6"
-                    app:layout_constraintStart_toStartOf="@id/tv_nik6"
-                    android:text="waktu"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="3dp"
                     android:layout_marginBottom="6dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/colorWhite"
-                    android:layout_marginTop="3dp"
-                    />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_nik6"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nik6"
+                    tools:text="waktu" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

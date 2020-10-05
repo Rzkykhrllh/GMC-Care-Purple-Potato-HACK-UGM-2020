@@ -11,6 +11,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ConfirmationActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".CancelTimerActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
