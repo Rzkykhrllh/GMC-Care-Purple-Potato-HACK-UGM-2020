@@ -45,18 +45,7 @@ class QueueFragment : Fragment(), View.OnClickListener {
         drawerLayout = requireActivity().findViewById(R.id.drawer_layout)
 
         btnOpenDrawerInQueue.setOnClickListener(this)
-
-        val isQueued = sharedPreferences.getIsQueued()
-
-        if (isQueued) {
-            tvNotQueued.visibility = View.GONE
-            val num = sharedPreferences.getUserQueueNumber()
-            tvYourQueueNumber.text = num.toString()
-        } else {
-            tvYourQueueNumber.visibility = View.INVISIBLE
-            tv_nomor_mu.visibility = View.INVISIBLE
-            tvNotQueued.visibility = View.VISIBLE
-        }
+        isQueued()
 
         Log.d("queue", "udah di queue fragment")
         updateCalling()
@@ -66,6 +55,20 @@ class QueueFragment : Fragment(), View.OnClickListener {
         updateRuang4()
         updateRuang5()
         updateRuang6()
+
+    }
+
+    private fun isQueued(){
+        val isQueued = sharedPreferences.getIsQueued()
+        if (isQueued) {
+            tvNotQueued.visibility = View.GONE
+            val num = sharedPreferences.getUserQueueNumber()
+            tvYourQueueNumber.text = num.toString()
+        } else {
+            tvYourQueueNumber.visibility = View.INVISIBLE
+            tv_nomor_mu.visibility = View.INVISIBLE
+            tvNotQueued.visibility = View.VISIBLE
+        }
 
     }
 
@@ -87,7 +90,7 @@ class QueueFragment : Fragment(), View.OnClickListener {
                             tvCurrentTicketNumber.text = temp.no_antrian
                             tv_title2.text = "silahkan menuju ke ruang ${temp.status}"
 
-                            when (temp.no_antrian.toInt() - userQueueNumber) {
+                            when ( userQueueNumber - temp.no_antrian.toInt() ) {
                                 10 -> {
                                     sendNotification("10 nomor lagi menuju nomor anda")
                                 }
@@ -106,6 +109,8 @@ class QueueFragment : Fragment(), View.OnClickListener {
                                 0->{
                                     sendNotification("Nomor anda telah dipanggil")
                                     setTimer()
+                                    sharedPreferences.setUserQueueNumber(-1)
+                                    sharedPreferences.setIsQueued(false)
                                 }
                             }
                         }

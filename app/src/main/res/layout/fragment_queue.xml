@@ -37,13 +37,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_semi_bold"
-        android:text="A97"
         android:textColor="@color/colorBlack"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@id/tv_room"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="A97" />
 
     <TextView
         android:id="@+id/tv_title2"
@@ -404,6 +404,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_semi_bold"
+        android:text=""
         android:textColor="@color/colorWhite"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="@+id/bottom_box"
@@ -437,4 +438,6 @@
         app:layout_constraintEnd_toEndOf="@id/bottom_box"
         app:layout_constraintStart_toStartOf="@id/bottom_box"
         app:layout_constraintTop_toTopOf="@id/bottom_box" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

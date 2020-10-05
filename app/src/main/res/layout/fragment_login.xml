@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimary"
             android:fontFamily="@font/montserrat_medium"
-            android:hint="Must have at least 8 character"
+            android:hint="Minimal 8 karakter"
             android:inputType="textPassword"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@id/tv_pass"
