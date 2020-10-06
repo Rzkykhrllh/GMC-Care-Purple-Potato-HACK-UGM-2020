@@ -15,6 +15,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -58,7 +59,7 @@ class QueueFragment : Fragment(), View.OnClickListener {
 
     }
 
-    private fun isQueued(){
+    private fun isQueued() {
         val isQueued = sharedPreferences.getIsQueued()
         if (isQueued) {
             tvNotQueued.visibility = View.GONE
@@ -75,234 +76,281 @@ class QueueFragment : Fragment(), View.OnClickListener {
     private fun updateCalling() {
         //function to update current number
         val userQueueNumber = sharedPreferences.getUserQueueNumber()
+        try {
+            FirebaseDatabase
+                .getInstance()
+                .reference
+                .child("CALLING").addValueEventListener(
+                    object : ValueEventListener {
+                        override fun onDataChange(p0: DataSnapshot) {
+                            val temp = p0.getValue(Pasien::class.java)
 
-        FirebaseDatabase
-            .getInstance()
-            .reference
-            .child("CALLING").addValueEventListener(
-                object : ValueEventListener {
-                    override fun onDataChange(p0: DataSnapshot) {
-                        val temp = p0.getValue(Pasien::class.java)
+                            Log.d("nomer calling", "$temp")
 
-                        Log.d("nomer calling", "$temp")
+                            temp?.let {
+                                tvCurrentTicketNumber.text = temp.no_antrian
+                                tv_title2.text = "silahkan menuju ke ruang ${temp.status}"
 
-                        temp?.let {
-                            tvCurrentTicketNumber.text = temp.no_antrian
-                            tv_title2.text = "silahkan menuju ke ruang ${temp.status}"
+                                when (userQueueNumber - temp.no_antrian.toInt()) {
+                                    10 -> {
+                                        sendNotification("10 nomor lagi menuju nomor anda")
+                                    }
 
-                            when ( userQueueNumber - temp.no_antrian.toInt() ) {
-                                10 -> {
-                                    sendNotification("10 nomor lagi menuju nomor anda")
-                                }
+                                    5 -> {
+                                        sendNotification("5 nomor lagi menuju nomor anda")
+                                    }
 
-                                5 -> {
-                                    sendNotification("5 nomor lagi menuju nomor anda")
-                                }
+                                    3 -> {
+                                        sendNotification("3 nomor lagi menuju nomor anda")
+                                    }
 
-                                3 -> {
-                                    sendNotification("3 nomor lagi menuju nomor anda")
-                                }
-
-                                1-> {
-                                    sendNotification("1 nomor lagi menuju nomor anda")
-                                }
-                                0->{
-                                    sendNotification("Nomor anda telah dipanggil")
-                                    setTimer()
-                                    sharedPreferences.setUserQueueNumber(-1)
-                                    sharedPreferences.setIsQueued(false)
+                                    1 -> {
+                                        sendNotification("1 nomor lagi menuju nomor anda")
+                                    }
+                                    0 -> {
+                                        sendNotification("Nomor anda telah dipanggil")
+                                        setTimer()
+                                        sharedPreferences.setUserQueueNumber(-1)
+                                        sharedPreferences.setIsQueued(false)
+                                        val snackBar = Snackbar.make(
+                                            queue_main_layout,
+                                            "Nomor anda telah dipanggil",
+                                            Snackbar.LENGTH_INDEFINITE
+                                        )
+                                        snackBar.setAction("OKE") {
+                                            snackBar.dismiss()
+                                        }
+                                        snackBar.show()
+                                    }
                                 }
                             }
+
+                            //entar manggil fungsi notif dan timer disini
                         }
 
-                        //entar manggil fungsi notif dan timer disini
+                        override fun onCancelled(p0: DatabaseError) {
+                            Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     }
+                )
+        } catch (e: RuntimeException) {
+            Log.d("updateCalling", e.message as String)
+        }
 
-                    override fun onCancelled(p0: DatabaseError) {
-                        Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            )
 
     }
 
     private fun updateRuang1() {
         var nomor = ""
-        FirebaseDatabase
-            .getInstance()
-            .getReference("RUANG_1").addValueEventListener(
-                object : ValueEventListener {
-                    override fun onDataChange(p0: DataSnapshot) {
+        try {
+            FirebaseDatabase
+                .getInstance()
+                .getReference("RUANG_1").addValueEventListener(
+                    object : ValueEventListener {
+                        override fun onDataChange(p0: DataSnapshot) {
 
+                            for (child in p0.children) {
+                                val data = child.getValue(Pasien::class.java)
+                                Log.d("cek nomor", "aye aye")
 
-                        for (child in p0.children) {
-                            val data = child.getValue(Pasien::class.java)
-                            Log.d("cek nomor", "aye aye")
+                                if (data != null) {
+                                    nomor = data.no_antrian
+                                    Log.d("nomor ruang 1", "$nomor")
+                                }
 
-                            if (data != null) {
-                                nomor = data.no_antrian
-                                Log.d("nomor ruang 1", "$nomor")
                             }
-
+                            num_room_1.text = nomor
                         }
-                        num_room_1.text = nomor
-                    }
 
-                    override fun onCancelled(p0: DatabaseError) {
-                        Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT).show()
+                        override fun onCancelled(p0: DatabaseError) {
+                            Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     }
-                }
-            )
+                )
+
+        } catch (e: RuntimeException) {
+            Log.d("updateRuang1", e.message as String)
+        }
 
     }
 
     private fun updateRuang2() {
         var nomor = ""
-        FirebaseDatabase
-            .getInstance()
-            .getReference("RUANG_2").addValueEventListener(
-                object : ValueEventListener {
-                    override fun onDataChange(p0: DataSnapshot) {
+        try {
+            FirebaseDatabase
+                .getInstance()
+                .getReference("RUANG_2").addValueEventListener(
+                    object : ValueEventListener {
+                        override fun onDataChange(p0: DataSnapshot) {
 
 
-                        for (child in p0.children) {
-                            val data = child.getValue(Pasien::class.java)
-                            Log.d("cek nomor", "aye aye")
+                            for (child in p0.children) {
+                                val data = child.getValue(Pasien::class.java)
+                                Log.d("cek nomor", "aye aye")
 
-                            if (data != null) {
-                                nomor = data.no_antrian
-                                Log.d("nomor ruang 2", "$nomor")
+                                if (data != null) {
+                                    nomor = data.no_antrian
+                                    Log.d("nomor ruang 2", "$nomor")
+                                }
+
                             }
-
+                            num_room_2.text = nomor
                         }
-                        num_room_2.text = nomor
-                    }
 
-                    override fun onCancelled(p0: DatabaseError) {
-                        Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT).show()
+                        override fun onCancelled(p0: DatabaseError) {
+                            Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     }
-                }
-            )
+                )
+
+        } catch (e: RuntimeException) {
+            Log.d("updateRuang2", e.message as String)
+        }
 
     }
 
     private fun updateRuang3() {
         var nomor = ""
-        FirebaseDatabase
-            .getInstance()
-            .getReference("RUANG_3").addValueEventListener(
-                object : ValueEventListener {
-                    override fun onDataChange(p0: DataSnapshot) {
+        try {
+            FirebaseDatabase
+                .getInstance()
+                .getReference("RUANG_3").addValueEventListener(
+                    object : ValueEventListener {
+                        override fun onDataChange(p0: DataSnapshot) {
 
 
-                        for (child in p0.children) {
-                            val data = child.getValue(Pasien::class.java)
-                            Log.d("cek nomor", "aye aye")
+                            for (child in p0.children) {
+                                val data = child.getValue(Pasien::class.java)
+                                Log.d("cek nomor", "aye aye")
 
-                            if (data != null) {
-                                nomor = data.no_antrian
-                                Log.d("nomor ruang 3", "$nomor")
+                                if (data != null) {
+                                    nomor = data.no_antrian
+                                    Log.d("nomor ruang 3", "$nomor")
+                                }
+
                             }
-
+                            num_room_3.text = nomor
                         }
-                        num_room_3.text = nomor
-                    }
 
-                    override fun onCancelled(p0: DatabaseError) {
-                        Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT).show()
+                        override fun onCancelled(p0: DatabaseError) {
+                            Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     }
-                }
-            )
+                )
+        } catch (e: RuntimeException) {
+            Log.d("updateRuang3", e.message as String)
+        }
+
 
     }
 
     private fun updateRuang4() {
         var nomor = ""
-        FirebaseDatabase
-            .getInstance()
-            .getReference("RUANG_4").addValueEventListener(
-                object : ValueEventListener {
-                    override fun onDataChange(p0: DataSnapshot) {
+        try {
+            FirebaseDatabase
+                .getInstance()
+                .getReference("RUANG_4").addValueEventListener(
+                    object : ValueEventListener {
+                        override fun onDataChange(p0: DataSnapshot) {
 
 
-                        for (child in p0.children) {
-                            val data = child.getValue(Pasien::class.java)
-                            Log.d("cek nomor", "aye aye")
+                            for (child in p0.children) {
+                                val data = child.getValue(Pasien::class.java)
+                                Log.d("cek nomor", "aye aye")
 
-                            if (data != null) {
-                                nomor = data.no_antrian
-                                Log.d("nomor ruang 4", "$nomor")
+                                if (data != null) {
+                                    nomor = data.no_antrian
+                                    Log.d("nomor ruang 4", "$nomor")
+                                }
+
                             }
-
+                            num_room_4.text = nomor
                         }
-                        num_room_4.text = nomor
-                    }
 
-                    override fun onCancelled(p0: DatabaseError) {
-                        Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT).show()
+                        override fun onCancelled(p0: DatabaseError) {
+                            Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     }
-                }
-            )
-
+                )
+        } catch (e: RuntimeException) {
+            Log.d("updateRuang4", e.message as String)
+        }
     }
 
     private fun updateRuang5() {
         var nomor = ""
-        FirebaseDatabase
-            .getInstance()
-            .getReference("RUANG_5").addValueEventListener(
-                object : ValueEventListener {
-                    override fun onDataChange(p0: DataSnapshot) {
+        try {
+            FirebaseDatabase
+                .getInstance()
+                .getReference("RUANG_5").addValueEventListener(
+                    object : ValueEventListener {
+                        override fun onDataChange(p0: DataSnapshot) {
 
 
-                        for (child in p0.children) {
-                            val data = child.getValue(Pasien::class.java)
-                            Log.d("cek nomor", "aye aye")
+                            for (child in p0.children) {
+                                val data = child.getValue(Pasien::class.java)
+                                Log.d("cek nomor", "aye aye")
 
-                            if (data != null) {
-                                nomor = data.no_antrian
-                                Log.d("nomor ruang 5", "$nomor")
+                                if (data != null) {
+                                    nomor = data.no_antrian
+                                    Log.d("nomor ruang 5", "$nomor")
+                                }
+
                             }
-
+                            num_room_5.text = nomor
                         }
-                        num_room_5.text = nomor
-                    }
 
-                    override fun onCancelled(p0: DatabaseError) {
-                        Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT).show()
+                        override fun onCancelled(p0: DatabaseError) {
+                            Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     }
-                }
-            )
+                )
+
+        } catch (e: RuntimeException) {
+            Log.d("updateRuang5", e.message as String)
+        }
 
     }
 
     private fun updateRuang6() {
         var nomor = ""
-        FirebaseDatabase
-            .getInstance()
-            .getReference("RUANG_6").addValueEventListener(
-                object : ValueEventListener {
-                    override fun onDataChange(p0: DataSnapshot) {
+        try {
+            FirebaseDatabase
+                .getInstance()
+                .getReference("RUANG_6").addValueEventListener(
+                    object : ValueEventListener {
+                        override fun onDataChange(p0: DataSnapshot) {
 
 
-                        for (child in p0.children) {
-                            val data = child.getValue(Pasien::class.java)
-                            Log.d("cek nomor", "aye aye")
+                            for (child in p0.children) {
+                                val data = child.getValue(Pasien::class.java)
+                                Log.d("cek nomor", "aye aye")
 
-                            if (data != null) {
-                                nomor = data.no_antrian
-                                Log.d("nomor ruang 6", "$nomor")
+                                if (data != null) {
+                                    nomor = data.no_antrian
+                                    Log.d("nomor ruang 6", "$nomor")
+                                }
+
                             }
-
+                            num_room_6.text = nomor
                         }
-                        num_room_6.text = nomor
-                    }
 
-                    override fun onCancelled(p0: DatabaseError) {
-                        Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT).show()
+                        override fun onCancelled(p0: DatabaseError) {
+                            Toast.makeText(activity, "Nomor gagal diambil", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     }
-                }
-            )
+                )
+        } catch (e: RuntimeException) {
+            Log.d("updateRuang6", e.message as String)
+        }
+
     }
 
     private fun sendNotification(message: String) {
